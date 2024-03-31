@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
     private var retrofit: Retrofit? = null //change to val?
     private var retrofitInterface: RetrofitInterface? = null
-    private val BASE_URL = "http://10.0.2.2:3000"
+    private val BASE_URL = "http://10.0.2.2:3000" //only for mac localhost
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     -init Lazy
     -where does the user data go?
     -add secure login
-
+    -Exceptions/error message when server is not available
     */
 
     private fun handleLoginDialog() {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             map["email"] = emailEdit.text.toString()
             map["password"] = passwordEdit.text.toString()
 
-            //insert coroutine here
+            //insert coroutine here -temp unfinished
             CoroutineScope(Dispatchers.IO).launch(Dispatchers.IO) {
                 val result = retrofit
             }
