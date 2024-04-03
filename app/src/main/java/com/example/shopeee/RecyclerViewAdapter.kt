@@ -3,8 +3,9 @@ package com.example.shopeee
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopeee.data.Items
 
-class RecyclerViewAdapter(val random : Int) : RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+class RecyclerViewAdapter(val itemList : ArrayList<Items>) : RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         TODO("Not yet implemented")
     }
