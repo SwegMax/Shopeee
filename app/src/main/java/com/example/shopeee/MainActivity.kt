@@ -85,6 +85,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
+
     private fun handleSignupDialog() {
         val view = layoutInflater.inflate(R.layout.signup_dialog, null)
         val builder = AlertDialog.Builder(this)
