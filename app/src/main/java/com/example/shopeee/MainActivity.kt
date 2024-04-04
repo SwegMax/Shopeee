@@ -7,6 +7,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.shopeee.data.Items
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +23,12 @@ class MainActivity : AppCompatActivity() {
     private var retrofit: Retrofit? = null //change to val?
     private var retrofitInterface: RetrofitInterface? = null
     private val BASE_URL = "http://10.0.2.2:3000" //only for mac localhost
+
+    private lateinit var newRecyclerView : RecyclerView
+    private lateinit var newArrayList : ArrayList<Items>
+    lateinit var imageId : Array<Int>
+    lateinit var heading : Array<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,6 +42,20 @@ class MainActivity : AppCompatActivity() {
         retrofitInterface = retrofit?.create(RetrofitInterface::class.java)
         findViewById<View>(R.id.login).setOnClickListener { handleLoginDialog() }
         findViewById<View>(R.id.signup).setOnClickListener { handleSignupDialog() }
+
+        //replace with database array
+        imageId = arrayOf()
+
+        heading = arrayOf()
+
+        newRecyclerView = findViewById(R.id.recyclerView)
+        newRecyclerView.layoutManager = LinearLayoutManager(this)
+        newRecyclerView.setHasFixedSize(true) //might not scale for diff screen size
+
+        newArrayList = arrayListOf<Items>()
+        getUserData()
+
+
     }
 
     /* Shopee uses a lot of override, @Override or override method type
@@ -119,5 +142,13 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun getUserData() {
+        for(i in imageId.indices) {
+            val item = Items(imageId[i],heading[i])
+            newArrayList.add(item)
+        }
+        newRecyclerView.adapter = RecyclerViewAdapter(newArrayList)
     }
 }
