@@ -1,4 +1,6 @@
-package com.example.shopeee;
+package com.example.shopeee.Interface;
+
+import com.example.shopeee.data.LoginResult;
 
 import java.util.HashMap;
 

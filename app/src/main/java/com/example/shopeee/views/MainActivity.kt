@@ -1,4 +1,4 @@
-package com.example.shopeee
+package com.example.shopeee.views
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopeee.R
+import com.example.shopeee.Interface.RetrofitInterface
 import com.example.shopeee.data.Items
+import com.example.shopeee.data.LoginResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
@@ -64,6 +67,13 @@ class MainActivity : AppCompatActivity() {
     -where does the user data go?
     -add secure login
     -Exceptions/error message when server is not available
+
+    Change Login and Register to Fragments to reduce memory usage
+    Add side bar
+    Add login activity
+    Add logout button
+    Add SLS login or sth
+    Make Handler class for login and signup dialogs
     */
 
     private fun handleLoginDialog() {
@@ -95,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                         builder1.setMessage(result.email)
                         builder1.show()
                     } else if (response.code() == 404) {
-                        Toast.makeText(this@MainActivity, "Wrong Credentials",
+                        Toast.makeText(this@MainActivity, "Wrong username or password",
                                 Toast.LENGTH_LONG).show()
                     }
                 }

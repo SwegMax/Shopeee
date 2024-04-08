@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.shopeee.LoginResult"
+        android:name="com.example.shopeee.data.LoginResult"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/signup_dialog">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.shopeee.RetrofitInterface"
+        android:name="com.example.shopeee.Interface.RetrofitInterface"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

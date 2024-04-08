@@ -1,10 +1,11 @@
-package com.example.shopeee
+package com.example.shopeee.views
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopeee.R
 import com.example.shopeee.data.Items
 import com.google.android.material.imageview.ShapeableImageView
 
