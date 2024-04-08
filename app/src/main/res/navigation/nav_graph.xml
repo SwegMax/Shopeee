@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.shopeee.Interface.RetrofitInterface"
+        android:name="com.example.shopeee.interfaces.RetrofitInterface"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

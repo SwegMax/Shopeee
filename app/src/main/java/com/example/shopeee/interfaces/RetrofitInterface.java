@@ -1,4 +1,4 @@
-package com.example.shopeee.Interface;
+package com.example.shopeee.interfaces;
 
 import com.example.shopeee.data.LoginResult;
 

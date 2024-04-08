@@ -2,23 +2,13 @@ package com.example.shopeee.views
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopeee.interfaces.AuthHandler
 import com.example.shopeee.R
-import com.example.shopeee.Interface.RetrofitInterface
+import com.example.shopeee.interfaces.RetrofitInterface
 import com.example.shopeee.data.Items
-import com.example.shopeee.data.LoginResult
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.Dispatchers
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -42,13 +32,15 @@ class MainActivity : AppCompatActivity() {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
         }
+
         retrofitInterface = retrofit?.create(RetrofitInterface::class.java)
-        findViewById<View>(R.id.login).setOnClickListener { handleLoginDialog() }
-        findViewById<View>(R.id.signup).setOnClickListener { handleSignupDialog() }
+        val authHandler = AuthHandler(this, retrofitInterface)
+        authHandler.handleLoginDialog()
+        findViewById<View>(R.id.login).setOnClickListener { AuthHandler.handleLoginDialog() }
+        findViewById<View>(R.id.signup).setOnClickListener { AuthHandler.handleSignupDialog() }
 
         //replace with database array
         imageId = arrayOf()
-
         heading = arrayOf()
 
         newRecyclerView = findViewById(R.id.recyclerView)
@@ -75,84 +67,6 @@ class MainActivity : AppCompatActivity() {
     Add SLS login or sth
     Make Handler class for login and signup dialogs
     */
-
-    private fun handleLoginDialog() {
-        val view = layoutInflater.inflate(R.layout.login_dialog, null)
-        val builder = AlertDialog.Builder(this)
-        builder.setView(view).show()
-        val loginBtn = view.findViewById<Button>(R.id.login)
-        val emailEdit = view.findViewById<EditText>(R.id.emailEdit)
-        val passwordEdit = view.findViewById<EditText>(R.id.passwordEdit)
-
-        loginBtn.setOnClickListener {
-            val map = HashMap<String, String>()
-            map["email"] = emailEdit.text.toString()
-            map["password"] = passwordEdit.text.toString()
-
-            //insert coroutine here -temp unfinished
-            CoroutineScope(Dispatchers.IO).launch(Dispatchers.IO) {
-                val result = retrofit
-            }
-
-            //original
-            val call = retrofitInterface!!.executeLogin(map)
-            call.enqueue(object : Callback<LoginResult?> {
-                override fun onResponse(call: Call<LoginResult?>, response: Response<LoginResult?>) {
-                    if (response.code() == 200) {
-                        val result = response.body()
-                        val builder1 = AlertDialog.Builder(this@MainActivity)
-                        builder1.setTitle(result!!.name)
-                        builder1.setMessage(result.email)
-                        builder1.show()
-                    } else if (response.code() == 404) {
-                        Toast.makeText(this@MainActivity, "Wrong username or password",
-                                Toast.LENGTH_LONG).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<LoginResult?>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, t.message,
-                            Toast.LENGTH_LONG).show()
-                }
-            })
-        }
-    }
-
-
-
-
-    private fun handleSignupDialog() {
-        val view = layoutInflater.inflate(R.layout.signup_dialog, null)
-        val builder = AlertDialog.Builder(this)
-        builder.setView(view).show()
-        val signupBtn = view.findViewById<Button>(R.id.signup)
-        val nameEdit = view.findViewById<EditText>(R.id.nameEdit)
-        val emailEdit = view.findViewById<EditText>(R.id.emailEdit)
-        val passwordEdit = view.findViewById<EditText>(R.id.passwordEdit)
-        signupBtn.setOnClickListener {
-            val map = HashMap<String, String>()
-            map["name"] = nameEdit.text.toString()
-            map["email"] = emailEdit.text.toString()
-            map["password"] = passwordEdit.text.toString()
-            val call = retrofitInterface!!.executeSignup(map)
-            call.enqueue(object : Callback<Void?> {
-                override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                    if (response.code() == 200) {
-                        Toast.makeText(this@MainActivity,
-                                "Signed up successfully", Toast.LENGTH_LONG).show()
-                    } else if (response.code() == 400) {
-                        Toast.makeText(this@MainActivity,
-                                "Already registered", Toast.LENGTH_LONG).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<Void?>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, t.message,
-                            Toast.LENGTH_LONG).show()
-                }
-            })
-        }
-    }
 
     private fun getUserData() {
         for(i in imageId.indices) {
