@@ -1,0 +1,7 @@
+{
+    "app_id": "shopeee-zuqyq",
+    "config_version": 20210101,
+    "name": "Shopeee",
+    "provider_region": "aws-us-east-1",
+    "deployment_model": "LOCAL"
+}
