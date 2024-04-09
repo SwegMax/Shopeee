@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.shopeee.R
 import com.example.shopeee.data.LoginResult
+import com.example.shopeee.databinding.LoginDialogBinding
 import com.example.shopeee.interfaces.RetrofitInterface
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,14 +15,17 @@ import retrofit2.Response
 
 class AuthHandler(private val context: Context, private val retrofitInterface: RetrofitInterface?) {
 
+    var loginBinding : LoginDialogBinding? = null
     fun handleLoginDialog() {
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.login_dialog, null)
+        //val view = inflater.inflate(R.layout.login_dialog, null)
+        loginBinding = LoginDialogBinding.inflate(inflater)
+
         val builder = AlertDialog.Builder(context)
-        builder.setView(view).show()
-        val loginBtn = view.findViewById<Button>(R.id.login)
-        val emailEdit = view.findViewById<EditText>(R.id.emailEdit)
-        val passwordEdit = view.findViewById<EditText>(R.id.passwordEdit)
+        builder.setView(loginBinding!!.root).show()
+        val loginBtn = loginBinding!!.loginBtn
+        val emailEdit = loginBinding!!.emailEdit
+        val passwordEdit = loginBinding!!.passwordEdit
 
         loginBtn.setOnClickListener {
             val map = HashMap<String, String>()
@@ -54,7 +58,7 @@ class AuthHandler(private val context: Context, private val retrofitInterface: R
         val view = inflater.inflate(R.layout.signup_dialog, null)
         val builder = AlertDialog.Builder(context)
         builder.setView(view).show()
-        val signupBtn = view.findViewById<Button>(R.id.signup)
+        val signupBtn = view.findViewById<Button>(R.id.signupBtn)
         val nameEdit = view.findViewById<EditText>(R.id.nameEdit)
         val emailEdit = view.findViewById<EditText>(R.id.emailEdit)
         val passwordEdit = view.findViewById<EditText>(R.id.passwordEdit)

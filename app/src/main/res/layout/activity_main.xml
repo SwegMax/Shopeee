@@ -10,17 +10,17 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log in"
-        android:id="@+id/login"
+        android:text="I'm registered"
+        android:id="@+id/loginRedirectBtn"
         android:layout_centerInParent="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign up"
-        android:id="@+id/signup"
+        android:text="I'm not registered"
+        android:id="@+id/signupRedirectBtn"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/login" />
+        android:layout_below="@id/loginRedirectBtn" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

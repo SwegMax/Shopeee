@@ -1,12 +1,12 @@
 package com.example.shopeee.views
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopeee.R
 import com.example.shopeee.data.Items
+import com.example.shopeee.databinding.ActivityMainBinding
 import com.example.shopeee.handlers.AuthHandler
 import com.example.shopeee.interfaces.RetrofitInterface
 import io.realm.Realm
@@ -24,16 +24,28 @@ class MainActivity : AppCompatActivity() {
     lateinit var imageId : Array<Int>
     lateinit var heading : Array<String>
 
+    var mainBinding : ActivityMainBinding? = null
     lateinit var app : App
     private val appId = "shopeee-zuqyq"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
         //Realm
         Realm.init(this)
         app = App(appId)
+
+        val authHandler = AuthHandler(this, retrofitInterface)
+
+        mainBinding!!.loginRedirectBtn.setOnClickListener{
+            authHandler.handleLoginDialog()
+        }
+
+        mainBinding!!.signupRedirectBtn.setOnClickListener{
+            authHandler.handleSignupDialog()
+        }
 
         if (retrofit != null) {
             retrofit = Retrofit.Builder()
@@ -43,13 +55,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         retrofitInterface = retrofit?.create(RetrofitInterface::class.java)
-        val authHandler = AuthHandler(this, retrofitInterface)
-        authHandler.handleLoginDialog()
-        findViewById<View>(R.id.login).setOnClickListener{
-            AuthHandler(this, retrofitInterface).handleLoginDialog() }
-        findViewById<View>(R.id.signup).setOnClickListener {
-            AuthHandler(this, retrofitInterface).handleSignupDialog() }
 
+        /*findViewById<View>(R.id.loginRedirectBtn).setOnClickListener{
+            AuthHandler(this, retrofitInterface).handleLoginDialog() }
+        findViewById<View>(R.id.signupRedirectBtn).setOnClickListener {
+            AuthHandler(this, retrofitInterface).handleSignupDialog() }*/
+
+
+
+
+
+
+        //Items list
         //replace with database array
         imageId = arrayOf()
         heading = arrayOf()
