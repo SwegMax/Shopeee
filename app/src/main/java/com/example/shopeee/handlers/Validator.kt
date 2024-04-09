@@ -1,4 +1,4 @@
-package com.example.shopeee.data
+package com.example.shopeee.handlers
 
 import java.util.regex.Pattern
 object Validator {

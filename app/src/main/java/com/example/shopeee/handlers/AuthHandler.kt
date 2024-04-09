@@ -1,4 +1,4 @@
-package com.example.shopeee.interfaces
+package com.example.shopeee.handlers
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Button
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.shopeee.R
 import com.example.shopeee.data.LoginResult
+import com.example.shopeee.interfaces.RetrofitInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

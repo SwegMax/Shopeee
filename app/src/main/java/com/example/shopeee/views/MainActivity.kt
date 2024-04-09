@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopeee.R
 import com.example.shopeee.data.Items
-import com.example.shopeee.interfaces.AuthHandler
+import com.example.shopeee.handlers.AuthHandler
 import com.example.shopeee.interfaces.RetrofitInterface
 import io.realm.Realm
 import io.realm.mongodb.App
