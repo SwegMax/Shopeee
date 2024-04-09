@@ -27,7 +27,7 @@ class AuthHandler(private val context: Context, private val retrofitInterface: R
             map["email"] = emailEdit.text.toString()
             map["password"] = passwordEdit.text.toString()
 
-            val call = retrofitInterface.executeLogin(map)
+            val call = retrofitInterface!!.executeLogin(map)
             call.enqueue(object : Callback<LoginResult?> {
                 override fun onResponse(call: Call<LoginResult?>, response: Response<LoginResult?>) {
                     if (response.code() == 200) {
@@ -50,7 +50,7 @@ class AuthHandler(private val context: Context, private val retrofitInterface: R
 
     fun handleSignupDialog() {
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.login_dialog, null)
+        val view = inflater.inflate(R.layout.signup_dialog, null)
         val builder = AlertDialog.Builder(context)
         builder.setView(view).show()
         val signupBtn = view.findViewById<Button>(R.id.signup)
@@ -62,7 +62,7 @@ class AuthHandler(private val context: Context, private val retrofitInterface: R
             map["name"] = nameEdit.text.toString()
             map["email"] = emailEdit.text.toString()
             map["password"] = passwordEdit.text.toString()
-            val call = retrofitInterface.executeSignup(map)
+            val call = retrofitInterface!!.executeSignup(map)
             call.enqueue(object : Callback<Void?> {
                 override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
                     if (response.code() == 200) {

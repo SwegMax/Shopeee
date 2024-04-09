@@ -3,8 +3,9 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.android") //version "1.8.10" apply false
+    id("io.realm.kotlin")
+    id("realm-android")
 }
-
 
 android {
     namespace = "com.example.shopeee"
@@ -38,6 +39,10 @@ android {
     }
 }
 
+realm {
+    isSyncEnabled = true
+}
+
 dependencies {
 
     //Basic Android
@@ -68,4 +73,8 @@ dependencies {
     //Kotlin coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
+    //Realm
+    implementation("io.realm:realm-gradle-plugin:10.11.1")
+    implementation("io.realm:android-adapters:4.0.0")
 }

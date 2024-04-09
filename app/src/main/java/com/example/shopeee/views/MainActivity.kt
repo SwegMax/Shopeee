@@ -5,10 +5,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shopeee.interfaces.AuthHandler
 import com.example.shopeee.R
-import com.example.shopeee.interfaces.RetrofitInterface
 import com.example.shopeee.data.Items
+import com.example.shopeee.interfaces.AuthHandler
+import com.example.shopeee.interfaces.RetrofitInterface
+import io.realm.Realm
+import io.realm.mongodb.App
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -22,10 +24,17 @@ class MainActivity : AppCompatActivity() {
     lateinit var imageId : Array<Int>
     lateinit var heading : Array<String>
 
+    lateinit var app : App
+    private val appId = "shopeee-zuqyq"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //convert to Kotlin
+
+        //Realm
+        Realm.init(this)
+        app = App(appId)
+
         if (retrofit != null) {
             retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -36,8 +45,10 @@ class MainActivity : AppCompatActivity() {
         retrofitInterface = retrofit?.create(RetrofitInterface::class.java)
         val authHandler = AuthHandler(this, retrofitInterface)
         authHandler.handleLoginDialog()
-        findViewById<View>(R.id.login).setOnClickListener { AuthHandler.handleLoginDialog() }
-        findViewById<View>(R.id.signup).setOnClickListener { AuthHandler.handleSignupDialog() }
+        findViewById<View>(R.id.login).setOnClickListener{
+            AuthHandler(this, retrofitInterface).handleLoginDialog() }
+        findViewById<View>(R.id.signup).setOnClickListener {
+            AuthHandler(this, retrofitInterface).handleSignupDialog() }
 
         //replace with database array
         imageId = arrayOf()
@@ -66,6 +77,9 @@ class MainActivity : AppCompatActivity() {
     Add logout button
     Add SLS login or sth
     Make Handler class for login and signup dialogs
+
+    jervis
+    qPfg9k1ydEL7VnVt
     */
 
     private fun getUserData() {
