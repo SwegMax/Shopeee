@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         Realm.init(this)
         app = App(appId)
 
-        val authHandler = AuthHandler(this, retrofitInterface)
+        val authHandler = AuthHandler(this, app)
 
         mainBinding!!.loginRedirectBtn.setOnClickListener{
             authHandler.handleLoginDialog()
@@ -55,15 +55,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         retrofitInterface = retrofit?.create(RetrofitInterface::class.java)
-
         /*findViewById<View>(R.id.loginRedirectBtn).setOnClickListener{
-            AuthHandler(this, retrofitInterface).handleLoginDialog() }
-        findViewById<View>(R.id.signupRedirectBtn).setOnClickListener {
-            AuthHandler(this, retrofitInterface).handleSignupDialog() }*/
-
-
-
-
+            AuthHandler(this, retrofitInterface).handleLoginDialog() }*/
 
 
         //Items list
@@ -89,11 +82,9 @@ class MainActivity : AppCompatActivity() {
     -Exceptions/error message when server is not available
 
     Change Login and Register to Fragments to reduce memory usage
-    Add side bar
-    Add login activity
     Add logout button
     Add SLS login or sth
-    Make Handler class for login and signup dialogs
+    Make Handler class for login and signup dialogs (done)
 
     jervis
     qPfg9k1ydEL7VnVt

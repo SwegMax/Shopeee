@@ -8,14 +8,19 @@ import androidx.appcompat.app.AlertDialog
 import com.example.shopeee.R
 import com.example.shopeee.data.LoginResult
 import com.example.shopeee.databinding.LoginDialogBinding
+import com.example.shopeee.databinding.SignupDialogBinding
 import com.example.shopeee.interfaces.RetrofitInterface
+import io.realm.mongodb.App
+import io.realm.mongodb.Credentials
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AuthHandler(private val context: Context, private val retrofitInterface: RetrofitInterface?) {
+class AuthHandler(private val context: Context, private val app : App) {
 
     var loginBinding : LoginDialogBinding? = null
+    var signUpBinding : SignupDialogBinding? = null
+
     fun handleLoginDialog() {
         val inflater = LayoutInflater.from(context)
         //val view = inflater.inflate(R.layout.login_dialog, null)
@@ -23,7 +28,7 @@ class AuthHandler(private val context: Context, private val retrofitInterface: R
 
         val builder = AlertDialog.Builder(context)
         builder.setView(loginBinding!!.root).show()
-        val loginBtn = loginBinding!!.loginBtn
+        /*val loginBtn = loginBinding!!.loginBtn
         val emailEdit = loginBinding!!.emailEdit
         val passwordEdit = loginBinding!!.passwordEdit
 
@@ -50,11 +55,27 @@ class AuthHandler(private val context: Context, private val retrofitInterface: R
                     Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
                 }
             })
+        }*/
+
+        val email = loginBinding!!.emailEdit.text.toString()
+        val password = loginBinding!!.passwordEdit.text.toString()
+
+        val credentials = Credentials.emailPassword(email,password)
+        app.loginAsync(credentials){result ->
+            if (result.error == null) {
+                Toast.makeText(context, "Logged in as ${result.get().id}",
+                        Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(context, "Error logging in ${result.error.localizedMessage}",
+                        Toast.LENGTH_SHORT).show()
+            }
         }
+
     }
 
     fun handleSignupDialog() {
-        val inflater = LayoutInflater.from(context)
+        /*val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.signup_dialog, null)
         val builder = AlertDialog.Builder(context)
         builder.setView(view).show()
@@ -81,6 +102,27 @@ class AuthHandler(private val context: Context, private val retrofitInterface: R
                     Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
                 }
             })
+        }*/
+
+        val inflater = LayoutInflater.from(context)
+        //val view = inflater.inflate(R.layout.login_dialog, null)
+        signUpBinding = SignupDialogBinding.inflate(inflater)
+
+        val builder = AlertDialog.Builder(context)
+        builder.setView(signUpBinding!!.root).show()
+
+        val email = signUpBinding!!.emailEdit.text.toString()
+        val password = signUpBinding!!.passwordEdit.text.toString()
+
+        app.emailPassword.registerUserAsync(email,password) {result ->
+            if (result.error == null) {
+                Toast.makeText(context, "User registered", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(context, "Error signing up ${result.error.localizedMessage}",
+                        Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 }
