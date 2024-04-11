@@ -1,22 +1,14 @@
-package com.example.shopeee.handlers
+package com.example.shopeee.controllerMVC
 import android.content.Context
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.shopeee.R
-import com.example.shopeee.data.LoginResult
 import com.example.shopeee.databinding.LoginDialogBinding
 import com.example.shopeee.databinding.SignupDialogBinding
-import com.example.shopeee.interfaces.RetrofitInterface
 import io.realm.mongodb.App
 import io.realm.mongodb.Credentials
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class AuthHandler(private val context: Context, private val app : App) {
+class AuthController(private val context: Context, private val app : App) {
 
     var loginBinding : LoginDialogBinding? = null
     var signUpBinding : SignupDialogBinding? = null

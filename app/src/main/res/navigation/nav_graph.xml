@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.shopeee.data.LoginResult"
+        android:name="com.example.shopeee.repository.LoginResult"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/signup_dialog">
 

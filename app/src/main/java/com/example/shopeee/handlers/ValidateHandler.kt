@@ -1,7 +1,7 @@
 package com.example.shopeee.handlers
 
 import java.util.regex.Pattern
-object Validator {
+object ValidateHandler {
     fun isUsernameValid(username: String): Boolean {
         // Check if username doesn't already exist in the database (pseudo-code)
         if (usernameExistsInDatabase(username)) {

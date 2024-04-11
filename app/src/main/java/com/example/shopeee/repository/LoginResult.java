@@ -1,4 +1,4 @@
-package com.example.shopeee.data;
+package com.example.shopeee.repository;
 
 public class LoginResult {
 

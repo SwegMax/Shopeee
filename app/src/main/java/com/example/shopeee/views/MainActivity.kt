@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopeee.R
-import com.example.shopeee.data.Items
+import com.example.shopeee.adapter.RecyclerViewAdapter
+import com.example.shopeee.repository.Item
 import com.example.shopeee.databinding.ActivityMainBinding
-import com.example.shopeee.handlers.AuthHandler
+import com.example.shopeee.controllerMVC.AuthController
 import com.example.shopeee.interfaces.RetrofitInterface
 import io.realm.Realm
 import io.realm.mongodb.App
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val BASE_URL = "http://10.0.2.2:3000" //only for mac localhost
 
     private lateinit var newRecyclerView : RecyclerView
-    private lateinit var newArrayList : ArrayList<Items>
+    private lateinit var newArrayList : ArrayList<Item>
     lateinit var imageId : Array<Int>
     lateinit var heading : Array<String>
 
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         Realm.init(this)
         app = App(appId)
 
-        val authHandler = AuthHandler(this, app)
+        val authHandler = AuthController(this, app)
 
         mainBinding!!.loginRedirectBtn.setOnClickListener{
             authHandler.handleLoginDialog()
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         newRecyclerView.layoutManager = LinearLayoutManager(this)
         newRecyclerView.setHasFixedSize(true) //might not scale for diff screen size
 
-        newArrayList = arrayListOf<Items>()
+        newArrayList = arrayListOf<Item>()
         getUserData()
 
 
@@ -86,13 +87,17 @@ class MainActivity : AppCompatActivity() {
     Add SLS login or sth
     Make Handler class for login and signup dialogs (done)
 
+    MongoDB:
     jervis
     qPfg9k1ydEL7VnVt
+
+    Fragments for items (simple)
+    Views for login and sign up (complex)
     */
 
     private fun getUserData() {
         for(i in imageId.indices) {
-            val item = Items(imageId[i],heading[i])
+            val item = Item(imageId[i],heading[i])
             newArrayList.add(item)
         }
         newRecyclerView.adapter = RecyclerViewAdapter(newArrayList)
