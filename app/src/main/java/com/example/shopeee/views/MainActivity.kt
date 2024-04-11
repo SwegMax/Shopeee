@@ -1,17 +1,23 @@
 package com.example.shopeee.views
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopeee.API.ItemsApi
 import com.example.shopeee.R
 import com.example.shopeee.adapter.RecyclerViewAdapter
 import com.example.shopeee.repository.Item
 import com.example.shopeee.databinding.ActivityMainBinding
 import com.example.shopeee.controllerMVC.AuthController
 import com.example.shopeee.interfaces.RetrofitInterface
+import com.example.shopeee.repository.ItemsRepository
 import io.realm.Realm
 import io.realm.mongodb.App
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -58,6 +64,15 @@ class MainActivity : AppCompatActivity() {
         retrofitInterface = retrofit?.create(RetrofitInterface::class.java)
         /*findViewById<View>(R.id.loginRedirectBtn).setOnClickListener{
             AuthHandler(this, retrofitInterface).handleLoginDialog() }*/
+
+
+        /*//MVVM get Items repo(temp)
+        val repository = ItemsRepository(ItemsApi())
+
+        GlobalScope.launch(Dispatchers.Main){
+            val items = repository.getItems()
+            Toast.makeText(this@MainActivity, items.toString(), Toast.LENGTH_LONG).show()
+        }*/
 
 
         //Items list
