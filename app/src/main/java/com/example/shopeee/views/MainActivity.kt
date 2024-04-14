@@ -1,35 +1,32 @@
 package com.example.shopeee.views
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shopeee.API.ItemsApi
 import com.example.shopeee.R
 import com.example.shopeee.adapter.RecyclerViewAdapter
 import com.example.shopeee.repository.Item
 import com.example.shopeee.databinding.ActivityMainBinding
 import com.example.shopeee.controllerMVC.AuthController
 import com.example.shopeee.interfaces.RetrofitInterface
-import com.example.shopeee.repository.ItemsRepository
 import io.realm.Realm
 import io.realm.mongodb.App
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private var retrofit: Retrofit? = null //change to val?
     private var retrofitInterface: RetrofitInterface? = null
-    private val BASE_URL = "http://10.0.2.2:3000" //only for mac localhost
+    private val BASE_URL = "http://localhost:8080"
 
     private lateinit var newRecyclerView : RecyclerView
     private lateinit var newArrayList : ArrayList<Item>
-    lateinit var imageId : Array<Int>
+    lateinit var itemImage : Array<Int>
     lateinit var heading : Array<String>
+    lateinit var id : Array<Long>
+    lateinit var quantity : Array<Int>
 
     var mainBinding : ActivityMainBinding? = null
     lateinit var app : App
@@ -77,12 +74,13 @@ class MainActivity : AppCompatActivity() {
 
         //Items list
         //replace with database array
-        imageId = arrayOf()
+        itemImage = arrayOf()
         heading = arrayOf()
 
         newRecyclerView = findViewById(R.id.recyclerView)
-        newRecyclerView.layoutManager = LinearLayoutManager(this)
-        newRecyclerView.setHasFixedSize(true) //might not scale for diff screen size
+        val layoutManager = GridLayoutManager(this, 2)
+        newRecyclerView.layoutManager = layoutManager
+        newRecyclerView.setHasFixedSize(true)
 
         newArrayList = arrayListOf<Item>()
         getUserData()
@@ -97,10 +95,13 @@ class MainActivity : AppCompatActivity() {
     -add secure login
     -Exceptions/error message when server is not available
 
-    Change Login and Register to Fragments to reduce memory usage
     Add logout button
     Add SLS login or sth
-    Make Handler class for login and signup dialogs (done)
+    Storing user info in Realm and item info in API!
+    Put all strings into xml file
+    DB structure: userID has an array of items that will be fetched
+    threads- whether it will interept main
+    mongodb realm- how to secure login
 
     MongoDB:
     jervis
@@ -111,8 +112,8 @@ class MainActivity : AppCompatActivity() {
     */
 
     private fun getUserData() {
-        for(i in imageId.indices) {
-            val item = Item(imageId[i],heading[i])
+        for(i in itemImage.indices) {
+            val item = Item(itemImage[i],heading[i],id[i],quantity[i])
             newArrayList.add(item)
         }
         newRecyclerView.adapter = RecyclerViewAdapter(newArrayList)

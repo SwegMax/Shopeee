@@ -17,20 +17,28 @@ class RecyclerViewAdapter(val itemList : ArrayList<Item>) : RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return itemList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = itemList[position]
-        holder.itemImage.setImageResource(currentItem.itemImage)
-        holder.itemHeading.text = currentItem.heading
+        /*holder.itemImage.setImageResource(currentItem.itemImage)
+        holder.itemHeading.text = currentItem.heading*/
+        holder.bind(currentItem)
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    //inner class - outer.Inner() is possible + no need to create instance
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage : ShapeableImageView = itemView.findViewById(R.id.item_image)
         val itemHeading : TextView = itemView.findViewById(R.id.item_heading)
+        val itemQty : TextView = itemView.findViewById(R.id.item_quantity)
         //view binding - remove findViewById
 
+        fun bind(item: Item) {
+            itemImage.setImageResource(item.itemImage)
+            itemHeading.text = item.heading
+            itemQty.text = item.Quantity.toString()
+        }
     }
 
 

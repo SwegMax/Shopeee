@@ -40,7 +40,6 @@ mongoClient.connect(url, (err, db) => {
         })
 
         app.post('/login', (req, res) => {
-
             const query = {
                 email: req.body.email,
                 password: req.body.password

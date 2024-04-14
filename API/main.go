@@ -8,9 +8,9 @@ import (
 
 
 type item struct {
-    ItemImage uint32 `json:"itemImage"` //might cause underflow with no negative
+	ID        string `json:"id"`
     Heading   string `json:"heading"`
-    ID        string `json:"id"`
+	ItemImage uint32 `json:"itemImage"` //might cause underflow with no negative
     Quantity  uint8  `json:"quantity"` //might need to change to int if app requires.
 }
 
@@ -108,3 +108,6 @@ func main() {
 	router.PATCH("/return", returnItem)
 	router.Run("localhost:8080")
 }
+
+
+/* curl localhost:8080/items --include --header "Content-Type: application/json" -d @API/database.json --request "POST" */
