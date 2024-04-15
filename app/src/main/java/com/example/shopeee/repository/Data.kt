@@ -4,4 +4,4 @@ data class Item(
         var itemImage : Int,
         var heading : String,
         var id : Long,
-        var Quantity: Int)
+        var quantity: Int)
