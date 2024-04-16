@@ -5,3 +5,9 @@ data class Item(
         var heading : String,
         var id : Long,
         var quantity: Int)
+
+data class User(
+        val userId: String,
+        val username: String,
+        var items: List<Item>
+)

@@ -17,10 +17,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
-    private var retrofit: Retrofit? = null //change to val?
-    private var retrofitInterface: RetrofitInterface? = null
-    private val BASE_URL = "http://localhost:8080"
-
     private lateinit var newRecyclerView : RecyclerView
     private lateinit var newArrayList : ArrayList<Item>
     lateinit var itemImage : Array<Int>
@@ -51,14 +47,6 @@ class MainActivity : AppCompatActivity() {
             authHandler.handleSignupDialog()
         }
 
-        if (retrofit != null) {
-            retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-        }
-
-        retrofitInterface = retrofit?.create(RetrofitInterface::class.java)
         /*findViewById<View>(R.id.loginRedirectBtn).setOnClickListener{
             AuthHandler(this, retrofitInterface).handleLoginDialog() }*/
 

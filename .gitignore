@@ -14,3 +14,4 @@ NodeJS/.vs/
 .externalNativeBuild
 .cxx
 local.properties
+.vs/

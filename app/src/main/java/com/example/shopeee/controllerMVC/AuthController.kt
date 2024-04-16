@@ -5,13 +5,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.shopeee.databinding.LoginDialogBinding
 import com.example.shopeee.databinding.SignupDialogBinding
+import com.example.shopeee.interfaces.RetrofitInterface
+import com.example.shopeee.repository.Item
 import io.realm.mongodb.App
 import io.realm.mongodb.Credentials
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class AuthController(private val context: Context, private val app : App) {
 
     var loginBinding : LoginDialogBinding? = null
     var signUpBinding : SignupDialogBinding? = null
+
+    private val BASE_URL = "http://localhost:8080"
 
     fun handleLoginDialog() {
         val inflater = LayoutInflater.from(context)
@@ -20,34 +29,8 @@ class AuthController(private val context: Context, private val app : App) {
 
         val builder = AlertDialog.Builder(context)
         builder.setView(loginBinding!!.root).show()
-        /*val loginBtn = loginBinding!!.loginBtn
-        val emailEdit = loginBinding!!.emailEdit
-        val passwordEdit = loginBinding!!.passwordEdit
 
-        loginBtn.setOnClickListener {
-            val map = HashMap<String, String>()
-            map["email"] = emailEdit.text.toString()
-            map["password"] = passwordEdit.text.toString()
 
-            val call = retrofitInterface!!.executeLogin(map)
-            call.enqueue(object : Callback<LoginResult?> {
-                override fun onResponse(call: Call<LoginResult?>, response: Response<LoginResult?>) {
-                    if (response.code() == 200) {
-                        val result = response.body()
-                        val builder1 = AlertDialog.Builder(context)
-                        builder1.setTitle(result!!.name)
-                        builder1.setMessage(result.email)
-                        builder1.show()
-                    } else if (response.code() == 404) {
-                        Toast.makeText(context, "Wrong username or password", Toast.LENGTH_LONG).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<LoginResult?>, t: Throwable) {
-                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
-                }
-            })
-        }*/
 
         val email = loginBinding!!.emailEdit.text.toString()
         val password = loginBinding!!.passwordEdit.text.toString()
@@ -57,45 +40,44 @@ class AuthController(private val context: Context, private val app : App) {
             if (result.error == null) {
                 Toast.makeText(context, "Logged in as ${result.get().id}",
                         Toast.LENGTH_SHORT).show()
+                //Get user session
+                val userSession = result.get()
+                fetchUserData(userSession.accessToken)
             }
             else {
                 Toast.makeText(context, "Error logging in ${result.error.localizedMessage}",
                         Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
+    fun fetchUserData(accessToken: String) {
+        val userID = "1231445151"
+
+        val retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+
+        val service = retrofit.create(RetrofitInterface::class.java)
+
+        val call: Call<List<Item>> = service.fetchItems("Bearer $accessToken", userID)
+        call.enqueue(object : Callback<List<Item>> {
+            override fun onResponse(call: Call<List<Item>>, response: Response<List<Item>>) {
+                if(response.isSuccessful) {
+                    val items = response.body()
+                } else {
+                    Toast.makeText(context, "Failed to fetch items", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onFailure(call: Call<List<Item>>, t:Throwable) {
+                Toast.makeText(context, "Failed to fetch items: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     fun handleSignupDialog() {
-        /*val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.signup_dialog, null)
-        val builder = AlertDialog.Builder(context)
-        builder.setView(view).show()
-        val signupBtn = view.findViewById<Button>(R.id.signupBtn)
-        val nameEdit = view.findViewById<EditText>(R.id.nameEdit)
-        val emailEdit = view.findViewById<EditText>(R.id.emailEdit)
-        val passwordEdit = view.findViewById<EditText>(R.id.passwordEdit)
-        signupBtn.setOnClickListener {
-            val map = HashMap<String, String>()
-            map["name"] = nameEdit.text.toString()
-            map["email"] = emailEdit.text.toString()
-            map["password"] = passwordEdit.text.toString()
-            val call = retrofitInterface!!.executeSignup(map)
-            call.enqueue(object : Callback<Void?> {
-                override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                    if (response.code() == 200) {
-                        Toast.makeText(context, "Signed up successfully", Toast.LENGTH_LONG).show()
-                    } else if (response.code() == 400) {
-                        Toast.makeText(context, "Already registered", Toast.LENGTH_LONG).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<Void?>, t: Throwable) {
-                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
-                }
-            })
-        }*/
-
         val inflater = LayoutInflater.from(context)
         //val view = inflater.inflate(R.layout.login_dialog, null)
         signUpBinding = SignupDialogBinding.inflate(inflater)
@@ -118,3 +100,33 @@ class AuthController(private val context: Context, private val app : App) {
         }
     }
 }
+
+
+/*val loginBtn = loginBinding!!.loginBtn
+       val emailEdit = loginBinding!!.emailEdit
+       val passwordEdit = loginBinding!!.passwordEdit
+
+       loginBtn.setOnClickListener {
+           val map = HashMap<String, String>()
+           map["email"] = emailEdit.text.toString()
+           map["password"] = passwordEdit.text.toString()
+
+           val call = retrofitInterface!!.executeLogin(map)
+           call.enqueue(object : Callback<LoginResult?> {
+               override fun onResponse(call: Call<LoginResult?>, response: Response<LoginResult?>) {
+                   if (response.code() == 200) {
+                       val result = response.body()
+                       val builder1 = AlertDialog.Builder(context)
+                       builder1.setTitle(result!!.name)
+                       builder1.setMessage(result.email)
+                       builder1.show()
+                   } else if (response.code() == 404) {
+                       Toast.makeText(context, "Wrong username or password", Toast.LENGTH_LONG).show()
+                   }
+               }
+
+               override fun onFailure(call: Call<LoginResult?>, t: Throwable) {
+                   Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+               }
+           })
+       }*/

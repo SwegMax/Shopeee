@@ -37,7 +37,7 @@ class RecyclerViewAdapter(val itemList : ArrayList<Item>) : RecyclerView.Adapter
         fun bind(item: Item) {
             itemImage.setImageResource(item.itemImage)
             itemHeading.text = item.heading
-            itemQty.text = item.Quantity.toString()
+            itemQty.text = item.quantity.toString()
         }
     }
 
