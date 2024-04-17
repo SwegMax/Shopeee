@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Profile"
+        android:id="@+id/profile"
+        android:icon="@drawable/baseline_accessibility_24"
+        />
+    <item
+        android:title="Market"
+        android:id="@+id/market"
+        android:icon="@drawable/baseline_add_shopping_cart_24"/>
+    <item
+        android:title="Logout"
+        android:id="@+id/logout"
+        android:icon="@drawable/baseline_logout_24"/>
+</menu>
