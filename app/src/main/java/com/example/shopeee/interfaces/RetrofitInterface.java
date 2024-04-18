@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RetrofitInterface {
-
+    //login and sign up might be useless
     @POST("/login")
     Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
 

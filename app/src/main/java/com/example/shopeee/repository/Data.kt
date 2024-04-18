@@ -7,7 +7,7 @@ data class Item(
         var quantity: Int)
 
 data class User(
-        val userId: String,
+        val userId: String = "",
         val username: String,
-        var items: List<Item>
+        var items: List<Item> = emptyList()
 )
