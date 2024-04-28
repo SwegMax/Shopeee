@@ -6,6 +6,7 @@ import com.example.shopeee.handlers.validatePassword
 import com.example.shopeee.repository.RegisterFieldState
 import com.example.shopeee.repository.RegisterValidation
 import com.example.shopeee.repository.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.realm.mongodb.App
 import io.realm.mongodb.User
 import kotlinx.coroutines.channels.Channel
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
+@HiltViewModel
 class RegisterViewModel @Inject constructor(
         private val realmApp: App
 ): ViewModel() {
@@ -49,6 +51,10 @@ class RegisterViewModel @Inject constructor(
                 validationChannel.send(registerFieldState)
             }
         }
+    }
+
+    private fun saveUserInfo(){
+
     }
 
     private fun checkValidation(userName: String, password: String): Boolean {

@@ -14,6 +14,8 @@ import com.example.shopeee.databinding.MainActivityBinding
 import io.realm.Realm
 import io.realm.mongodb.App
 
+//This will be the Market activity!
+
 class MainActivity : AppCompatActivity() {
     private lateinit var newRecyclerView : RecyclerView
     private lateinit var newArrayList : ArrayList<Item>
