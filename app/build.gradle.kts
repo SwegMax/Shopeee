@@ -80,6 +80,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     //Realm
-    implementation("io.realm:realm-gradle-plugin:10.11.1")
-    implementation("io.realm:android-adapters:4.0.0")
+    implementation("io.realm:realm-gradle-plugin:10.15.1")
+    //implementation("io.realm:android-adapters:4.0.0")
 }
