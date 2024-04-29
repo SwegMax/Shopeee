@@ -10,6 +10,7 @@ import com.example.shopeee.R
 import com.example.shopeee.adapter.RecyclerViewAdapter
 import com.example.shopeee.repository.Item
 import com.example.shopeee.controllerMVC.AuthController
+import com.example.shopeee.databinding.FirstActivityBinding
 import com.example.shopeee.databinding.MainActivityBinding
 import io.realm.Realm
 import io.realm.mongodb.App
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         newArrayList = arrayListOf<Item>()
         getUserData()
 
-        mainBinding!!.bottomNavigationView.setOnItemSelectedListener { menuItem ->
+        mainBinding!!.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.profile -> replaceFragment(Profile())
                 R.id.market -> replaceFragment(Market())
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-                .replace(R.id.frame_layout,fragment)
+                .replace(androidx.constraintlayout.widget.R.id.constraint,fragment)
                 .commit()
     }
 

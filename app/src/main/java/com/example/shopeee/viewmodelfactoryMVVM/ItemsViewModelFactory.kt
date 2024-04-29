@@ -9,6 +9,7 @@ import com.example.shopeee.viewmodelMVVM.ItemsViewModel
 class ItemsViewModelFactory(private val repository: ItemsRepository)
     : ViewModelProvider.NewInstanceFactory() {
 
+        @JvmName("createViewModelFromClass")
         fun <T : ViewModel?> create(modelClass: Class<T>): T{
             return ItemsViewModel(repository) as T
         }

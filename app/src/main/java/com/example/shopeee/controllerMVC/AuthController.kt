@@ -3,8 +3,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.shopeee.databinding.LoginDialogBinding
-import com.example.shopeee.databinding.SignupDialogBinding
+import com.example.shopeee.databinding.FragmentLoginBinding
+import com.example.shopeee.databinding.FragmentRegisterBinding
 import com.example.shopeee.interfaces.RetrofitInterface
 import com.example.shopeee.repository.Item
 import io.realm.mongodb.App
@@ -16,23 +16,23 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class AuthController(private val context: Context, private val app : App) {
-
-    var loginBinding : LoginDialogBinding? = null
-    var signUpBinding : SignupDialogBinding? = null
+    private lateinit var binding: FragmentLoginBinding
+    var loginBinding : FragmentLoginBinding? = null
+    var signUpBinding : FragmentRegisterBinding? = null
 
     private val BASE_URL = "http://localhost:8080"
 
     fun handleLoginDialog() {
         val inflater = LayoutInflater.from(context)
         //val view = inflater.inflate(R.layout.login_dialog, null)
-        loginBinding = LoginDialogBinding.inflate(inflater)
+        loginBinding = FragmentLoginBinding.inflate(inflater)
 
         val builder = AlertDialog.Builder(context)
         builder.setView(loginBinding!!.root).show()
 
 
 
-        val email = loginBinding!!.emailEdit.text.toString()
+        val email = loginBinding!!.userEdit.text.toString()
         val password = loginBinding!!.passwordEdit.text.toString()
 
         val credentials = Credentials.emailPassword(email,password)
@@ -80,12 +80,12 @@ class AuthController(private val context: Context, private val app : App) {
     fun handleSignupDialog() {
         val inflater = LayoutInflater.from(context)
         //val view = inflater.inflate(R.layout.login_dialog, null)
-        signUpBinding = SignupDialogBinding.inflate(inflater)
+        signUpBinding = FragmentRegisterBinding.inflate(inflater)
 
         val builder = AlertDialog.Builder(context)
         builder.setView(signUpBinding!!.root).show()
 
-        val email = signUpBinding!!.emailEdit.text.toString()
+        val email = signUpBinding!!.userEdit.text.toString()
         val password = signUpBinding!!.passwordEdit.text.toString()
 
         app.emailPassword.registerUserAsync(email,password) {result ->

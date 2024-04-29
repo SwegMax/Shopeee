@@ -1,7 +1,7 @@
 package com.example.shopeee.repository
 
 sealed class RegisterValidation {
-    data object Success: RegisterValidation()
+    object Success: RegisterValidation()
     data class Failed(val message: String): RegisterValidation()
 }
 
