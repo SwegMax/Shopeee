@@ -2,7 +2,8 @@ plugins {
     id("com.android.application")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("org.jetbrains.kotlin.android") //version "1.8.10" apply false
+    id("kotlin-android")
+    id("kotlin-parcelize")
     id("io.realm.kotlin")
     id("realm-android")
 }
@@ -13,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.shopeee"
-        minSdk = 30
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -53,7 +54,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.6.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    //implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.20"))
     implementation("androidx.core:core-ktx:+")
     implementation("androidx.core:core-ktx:+")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
