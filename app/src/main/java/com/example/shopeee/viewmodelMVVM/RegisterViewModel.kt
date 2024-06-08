@@ -6,6 +6,8 @@ import com.example.shopeee.handlers.validatePassword
 import com.example.shopeee.repository.RegisterFieldState
 import com.example.shopeee.repository.RegisterValidation
 import com.example.shopeee.repository.Resource
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.realm.mongodb.App
 import io.realm.mongodb.User
@@ -18,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-        private val realmApp: App
+        private val firebaseAuth: FirebaseAuth,
+        private val db:FirebaseFirestore
 ): ViewModel() {
 
     private val registerStateFlow = MutableStateFlow<Resource<User>>(Resource.Loading())
