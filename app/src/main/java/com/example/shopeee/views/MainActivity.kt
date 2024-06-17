@@ -10,7 +10,6 @@ import com.example.shopeee.R
 import com.example.shopeee.adapter.RecyclerViewAdapter
 import com.example.shopeee.repository.Item
 import com.example.shopeee.controllerMVC.AuthController
-import com.example.shopeee.databinding.FirstActivityBinding
 import com.example.shopeee.databinding.MainActivityBinding
 import io.realm.Realm
 import io.realm.mongodb.App
@@ -88,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     private fun logoutUser() {
         // Implement your logout logic here, such as clearing user session, navigating to login screen, etc.
         // For example:
-        startActivity(Intent(this, FirstActivity::class.java))
+        startActivity(Intent(this, FirstFragment::class.java))
         finish() // Close the current activity after logging out
     }
 

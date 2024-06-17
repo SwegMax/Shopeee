@@ -1,36 +1,39 @@
 package com.example.shopeee.viewmodelMVVM
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.shopeee.repository.Resource
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.realm.mongodb.App
-import io.realm.mongodb.Credentials
-import io.realm.mongodb.User
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val realmApp: App
+    private val firebaseAuth: FirebaseAuth
 ): ViewModel() {
 
-    private val loginStateFlow = MutableStateFlow<Resource<User>>(Resource.Loading())
-    fun observeLoginState(): Flow<Resource<User>> {
-        return loginStateFlow
-    }
-    fun login(userName: String, password: String) {
-        loginStateFlow.value = Resource.Loading()
-
-        realmApp.loginAsync(Credentials.emailPassword(userName, password)) { result ->
-            if (result.isSuccess) {
-                val user = result.get()
-                loginStateFlow.value = Resource.Success(user)
-
-            } else {
-                val error = result.error
-                loginStateFlow.value = Resource.Error("Error logging in: ${error.localizedMessage}")
-            }
+    private val loginStateFlow = MutableSharedFlow<Resource<FirebaseUser>>()
+    val login = loginStateFlow.asSharedFlow()
+    fun login(email: String, password: String) {
+        viewModelScope.launch {
+            loginStateFlow.emit(Resource.Loading())
         }
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener {
+                    viewModelScope.launch {
+                        it.user?.let {
+                            loginStateFlow.emit(Resource.Success(it))
+                        }
+                    }
+                }.addOnFailureListener {
+                    viewModelScope.launch {
+                        loginStateFlow.emit(Resource.Error(it.toString()))
+                    }
+                }
+
     }
 }
