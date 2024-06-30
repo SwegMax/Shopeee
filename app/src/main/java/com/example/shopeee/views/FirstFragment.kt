@@ -26,4 +26,11 @@ class FirstFragment : Fragment() {
 
 
 
+    /*<activity
+    android:id="@+id/firstActivity"
+    android:name="com.example.shopeee.views.FirstFragment"
+    android:label="first_activity"
+    tools:layout="@layout/first_activity" />*/
+
+
 }
