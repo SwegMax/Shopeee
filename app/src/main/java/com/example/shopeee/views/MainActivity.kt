@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = MainActivityBinding.inflate(layoutInflater)
         setContentView(R.layout.first_activity)
-        replaceFragment(Profile())
+        replaceFragment(ProfileFragment())
 
         //Realm
         Realm.init(this)
@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
 
         mainBinding!!.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.profile -> replaceFragment(Profile())
-                R.id.market -> replaceFragment(Market())
+                R.id.profile -> replaceFragment(ProfileFragment())
+                R.id.market -> replaceFragment(HomeFragment())
                 R.id.logout -> logoutUser()
 
                 else -> {

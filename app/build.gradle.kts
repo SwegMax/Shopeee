@@ -45,6 +45,8 @@ realm {
     isSyncEnabled = true
 }
 
+val navVersion = "2.7.7"
+
 dependencies {
 
     //Basic Android
@@ -85,4 +87,8 @@ dependencies {
     //Realm
     implementation("io.realm:realm-gradle-plugin:10.15.1")
     //implementation("io.realm:android-adapters:4.0.0")
+
+    //Navigation UI
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 }

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/market2"
-        android:name="com.example.shopeee.views.Market"
+        android:name="com.example.shopeee.views.HomeFragment"
         android:label="fragment_market"
-        tools:layout="@layout/fragment_market" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/profile2"
-        android:name="com.example.shopeee.views.Profile"
+        android:name="com.example.shopeee.views.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
