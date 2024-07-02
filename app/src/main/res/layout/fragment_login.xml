@@ -12,7 +12,7 @@
         android:id="@+id/text_lets_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/passwordEdit"
-        android:layout_marginTop="30dp"/>
+        android:layout_margin="30dp"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"

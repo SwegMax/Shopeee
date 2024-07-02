@@ -2,6 +2,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="smallButtonWidth">110dp</dimen>
     <dimen name="smallButtonHeight">35dp</dimen>
-    <dimen name="editTextHeight">15dp</dimen>
-    <dimen name="mediumButtonHeight">15dp</dimen>
+    <dimen name="editTextHeight">12dp</dimen>
+    <dimen name="mediumButtonHeight">12dp</dimen>
 </resources>
