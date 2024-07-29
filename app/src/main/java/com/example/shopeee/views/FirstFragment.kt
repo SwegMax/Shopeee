@@ -24,6 +24,9 @@ class FirstFragment : Fragment() {
             super.onViewCreated(view, savedInstanceState)
         }
 
+    //#14 add only Best Products recyclerView as xml. Make the title stick to top
+    //#15 skip
+
 
 
     /*<activity
