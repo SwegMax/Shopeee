@@ -44,7 +44,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_height="0dp"
                 android:layout_width="wrap_content"
-                android:id="@+id/tvBestDealsProducts"
+                android:id="@+id/rvBestDealsProducts"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,10 +62,10 @@
                 android:textSize="22sp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvBestDealsProducts"/>
+                app:layout_constraintTop_toBottomOf="@id/rvBestDealsProducts"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tvBestProductsProducts"
+                android:id="@+id/rvBestProducts"
                 android:layout_height="0dp"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="15dp"
