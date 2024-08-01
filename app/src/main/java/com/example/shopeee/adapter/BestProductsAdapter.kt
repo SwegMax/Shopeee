@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.shopeee.databinding.BestDealsRvItemBinding
 import com.example.shopeee.databinding.ProductRvItemBinding
 import com.example.shopeee.repository.Product
 
-class BestProductAdapter: RecyclerView.Adapter<BestProductAdapter.BestProductsViewHolder>() {
+class BestProductsAdapter: RecyclerView.Adapter<BestProductsAdapter.BestProductsViewHolder>() {
 
     inner class BestProductsViewHolder(private val binding: ProductRvItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) { //i think product was initialised in the previous
