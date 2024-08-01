@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.shopeee.R
 import com.example.shopeee.adapter.BestProductsAdapter
 import com.example.shopeee.databinding.FragmentBaseCategoryBinding
 
 open class BaseCategoryFragment: Fragment(R.layout.fragment_base_category){
     private lateinit var binding: FragmentBaseCategoryBinding
-    private lateinit var offerAdapter: BestProductsAdapter
-    private lateinit var bestProductsAdapter: BestProductsAdapter
+    protected val offerAdapter: BestProductsAdapter by lazy {BestProductsAdapter()}
+    protected val bestProductsAdapter: BestProductsAdapter by lazy {BestProductsAdapter()}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,10 +30,25 @@ open class BaseCategoryFragment: Fragment(R.layout.fragment_base_category){
 
         setUpOfferRv()
         setupBestProductsRv()
+
+        binding.rvOfferProducts.addOnScrollListener(object: RecyclerView.onScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+
+            }
+        })
+    }
+
+    open fun onOfferPagingRequest(){
+
+    }
+
+    open fun onBestProductsPagingRequest(){
+
     }
 
     private fun setupBestProductsRv() {
-        bestProductsAdapter = BestProductsAdapter()
         binding.rvBestProducts.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -41,7 +57,6 @@ open class BaseCategoryFragment: Fragment(R.layout.fragment_base_category){
     }
 
     private fun setUpOfferRv() {
-        offerAdapter = BestProductsAdapter()
         binding.rvBestProducts.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
