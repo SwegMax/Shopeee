@@ -90,7 +90,7 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
     private fun setupBestDealsRv() {
         bestDealsAdapter = BestDealsAdapter()
         binding.rvBestDealsProducts.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = bestDealsAdapter
         }
     }
@@ -98,8 +98,7 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
     private fun setupBestProducts() {
         bestProductsAdapter = BestProductsAdapter()
         binding.rvBestProducts.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             adapter = bestProductsAdapter
         }
     }
