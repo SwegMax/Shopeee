@@ -15,12 +15,12 @@ data class Item(
         var items: List<Item> = emptyList()
 )*/
 
-@Parcelize
+//@Parcelize
 data class User(
         var firstName:String,
         var lastName:String,
         var email:String,
         var imagePath:String=""
-): Parcelable {
+)/* Parcelable {
     constructor() : this("","","")
-}
+}*/

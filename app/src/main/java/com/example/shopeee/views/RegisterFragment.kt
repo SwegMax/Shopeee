@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.shopeee.databinding.FragmentRegisterBinding
 import com.example.shopeee.repository.RegisterValidation
 import com.example.shopeee.repository.Resource
+import com.example.shopeee.repository.User
 import com.example.shopeee.viewmodelMVVM.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -37,17 +38,19 @@ class RegisterFragment : Fragment() {
 
         binding.apply{
             signupBtn.setOnClickListener{
-                val user = nameEdit.text.toString().trim()
+                val user = User(
+                    nameEdit.text.toString().trim(),
+                    "lastNamePlaceHolder",
+                    "emailPlaceHolder"
+                )
                 val password = passwordEdit.text.toString().trim()
                 viewModel.register(user, password)
             }
         }
 
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // This block will be executed whenever the lifecycle is at least in the STARTED state
-                viewModel.observeRegisterState().collect { state ->
-                    when (state) {
+        lifecycleScope.launchWhenStarted {
+                viewModel.register.collect {
+                    when (it) {
                         is Resource.Loading -> {
                             // Update UI to show loading state
                             // For example: binding.signupBtn.startAnimation()
@@ -65,8 +68,8 @@ class RegisterFragment : Fragment() {
                         }
                     }
                 }
-            }
         }
+
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

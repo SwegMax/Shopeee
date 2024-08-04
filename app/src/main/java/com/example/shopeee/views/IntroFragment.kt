@@ -5,35 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import io.realm.mongodb.App
+import com.example.shopeee.databinding.FragmentIntroductionBinding
 
-class FirstFragment : Fragment() {
+class IntroFragment : Fragment() {
     /*lateinit var app : App
     private val appId = "shopeee-zuqyq"*/
-    private lateinit var binding: FragmentFirstBinding
+    private lateinit var binding: FragmentIntroductionBinding
         override fun onCreateView(
                 inflater: LayoutInflater,
                 container: ViewGroup?,
                 savedInstanceState: Bundle?
         ): View? {
-            binding = FragmentFirstBinding.inflate(layoutInflater)
+            binding = FragmentIntroductionBinding.inflate(layoutInflater)
             return binding.root
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
         }
-
-    //#14 add only Best Products recyclerView as xml. Make the title stick to top
-    //#15 skip
-
-
-
-    /*<activity
-    android:id="@+id/firstActivity"
-    android:name="com.example.shopeee.views.FirstFragment"
-    android:label="first_activity"
-    tools:layout="@layout/first_activity" />*/
-
 
 }
