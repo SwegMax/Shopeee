@@ -47,7 +47,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 viewModel.login.collect {
                     when (it) {
                         is Resource.Success -> {
-                            Intent(requireActivity(), MainActivity::class.java).also {intent ->
+                            Intent(requireActivity(), ShoppingActivity::class.java).also {intent ->
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                 //won't let users logout by pressing back, exits app
                                 startActivity(intent)

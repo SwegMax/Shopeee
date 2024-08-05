@@ -60,7 +60,7 @@
             android:textColor="@color/black"
             android:textSize="12sp"/>
 
-        <!--<br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+        <!--<Button
             android:id="@+id/btn_see_product"
             android:layout_width="@dimen/_83sdp"
             android:layout_height="@dimen/_28sdp"
