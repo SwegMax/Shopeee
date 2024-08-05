@@ -4,6 +4,10 @@
     <dimen name="smallButtonHeight">35dp</dimen>
     <dimen name="editTextHeight">12dp</dimen>
     <dimen name="mediumButtonHeight">12dp</dimen>
+<<<<<<< HEAD
     <dimen name="buttonCorners">4dp</dimen>
+=======
+    <dimen name="buttonCorners">8dp</dimen>
+>>>>>>> 3fe3923b2cedaf376d9dbc543a8909dc303f6304
     <dimen name="_5sdp">5dp</dimen>
 </resources>

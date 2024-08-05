@@ -49,7 +49,11 @@
             android:textSize="12sp"
             android:fontFamily="@font/sf_pro_display"/>
 
+<<<<<<< HEAD
         <Button
+=======
+        <com.github.razir.progressbutton.ProgressButton
+>>>>>>> 3fe3923b2cedaf376d9dbc543a8909dc303f6304
             android:id="@+id/btn_add_to_cart"
             android:layout_width="77dp"
             android:layout_height="25dp"

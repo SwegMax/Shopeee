@@ -49,6 +49,7 @@ class RegisterFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenStarted {
+<<<<<<< HEAD
             viewModel.register.collect {
                 when (it) {
                     is Resource.Loading -> {
@@ -65,9 +66,27 @@ class RegisterFragment : Fragment() {
                     }
                     else -> {
                         Log.d(null, "Register onClickListener failed")
+=======
+                viewModel.register.collect {
+                    when (it) {
+                        is Resource.Loading -> {
+                            // Update UI to show loading state
+                            // For example: binding.signupBtn.startAnimation()
+                        }
+                        is Resource.Success -> {
+                            // Update UI for success state
+                            Log.d(null, "Register onClickListener success")
+                        }
+                        is Resource.Error -> {
+                            // Update UI for error state
+                            Log.d(null, "Register onClickListener failed")
+                        }
+                        else -> {
+                            Log.d(null, "Register onClickListener failed")
+                        }
+>>>>>>> 3fe3923b2cedaf376d9dbc543a8909dc303f6304
                     }
                 }
-            }
         }
 
 

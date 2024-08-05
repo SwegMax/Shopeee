@@ -77,8 +77,5 @@
             android:layout_marginStart="@dimen/_20sdp"
             />-->
 
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
