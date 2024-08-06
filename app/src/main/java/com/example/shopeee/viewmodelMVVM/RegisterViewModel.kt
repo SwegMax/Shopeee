@@ -9,7 +9,6 @@ import com.example.shopeee.repository.RegisterValidation
 import com.example.shopeee.repository.Resource
 import com.example.shopeee.repository.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel

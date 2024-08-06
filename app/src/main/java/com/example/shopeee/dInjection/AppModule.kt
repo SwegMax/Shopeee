@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object App {
+object AppModule {
 
     @Provides
     @Singleton
