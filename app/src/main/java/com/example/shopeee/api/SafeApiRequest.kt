@@ -1,4 +1,4 @@
-package com.example.shopeee.API
+package com.example.shopeee.api
 
 import retrofit2.Response
 import java.io.IOException

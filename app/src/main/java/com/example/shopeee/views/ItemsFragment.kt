@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shopeee.API.ItemsApi
+import com.example.shopeee.api.ItemsApi
 import com.example.shopeee.viewmodelMVVM.ItemsViewModel
 import com.example.shopeee.R
 import com.example.shopeee.repository.ItemsRepository

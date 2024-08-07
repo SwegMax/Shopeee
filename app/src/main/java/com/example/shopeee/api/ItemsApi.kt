@@ -1,4 +1,4 @@
-package com.example.shopeee.API
+package com.example.shopeee.api
 
 import com.example.shopeee.repository.Item
 import retrofit2.Response
