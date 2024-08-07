@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.kapt'
-    id 'dagger.hilt.android.plugin'
+    //id 'org.jetbrains.kotlin.kapt'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    //id 'dagger.hilt.android.plugin'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'io.realm.kotlin'
@@ -10,12 +12,12 @@ plugins {
 
 android {
     namespace = 'com.example.shopeee'
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = 'com.example.shopeee'
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = '1.0'
 
@@ -45,7 +47,7 @@ android {
 
 configurations.all {
     resolutionStrategy {
-        force 'androidx.core:core:1.10.1'
+        force 'androidx.core:core:1.12.0'
     }
 }
 
@@ -61,7 +63,7 @@ realm {
 
 dependencies {
     // Basic Android
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
@@ -102,7 +104,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
 
     // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
 
     // Firebase coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
@@ -111,8 +115,10 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
 
     // Dagger Hilt
-    implementation 'com.google.dagger:hilt-android:2.38.1'
-    kapt 'com.google.dagger:hilt-compiler:2.38.1'
+    implementation 'com.google.dagger:hilt-android:2.50'
+    kapt 'com.google.dagger:hilt-compiler:2.50'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }
