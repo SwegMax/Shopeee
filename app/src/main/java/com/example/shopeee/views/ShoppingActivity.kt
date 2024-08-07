@@ -1,5 +1,6 @@
 package com.example.shopeee.views
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -7,7 +8,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.shopeee.R
 import com.example.shopeee.databinding.ActivityShoppingBinding
 
-class ShoppingActivity : AppCompatActivity() {
+class ShoppingActivity : Activity() {
 
     val binding by lazy {
         ActivityShoppingBinding.inflate(layoutInflater)
