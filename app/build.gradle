@@ -8,6 +8,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'io.realm.kotlin'
     id 'realm-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -84,6 +85,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.0.1'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    //implementation 'com.google.firebase:firebase-auth:23.0.0'
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
     implementation 'com.google.firebase:firebase-common-ktx:20.0.0'
