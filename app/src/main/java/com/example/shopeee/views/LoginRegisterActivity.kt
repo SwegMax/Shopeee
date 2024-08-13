@@ -1,6 +1,8 @@
 package com.example.shopeee.views
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shopeee.R
 import dagger.hilt.android.AndroidEntryPoint
