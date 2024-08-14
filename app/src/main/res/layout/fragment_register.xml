@@ -31,8 +31,20 @@
         app:layout_constraintBottom_toTopOf="@+id/userEdit"
         style="@style/editText"
         android:layout_margin="20dp"
+        android:hint="Enter first name"
+        android:id="@+id/ed_first_name" />
+    
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="@dimen/editTextHeight"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/text_lets_sign_up"
+        app:layout_constraintBottom_toTopOf="@+id/userEdit"
+        style="@style/editText"
+        android:layout_margin="20dp"
         android:hint="Enter name"
-        android:id="@+id/nameEdit" />
+        android:id="@+id/ed_last_name" />
 
     <EditText
         android:layout_width="0dp"
@@ -44,7 +56,7 @@
         style="@style/editText"
         android:layout_margin="20dp"
         android:hint="Enter email"
-        android:id="@+id/userEdit" />
+        android:id="@+id/ed_email" />
 
     <EditText
         android:layout_width="0dp"
@@ -56,7 +68,7 @@
         style="@style/editText"
         android:layout_margin="20dp"
         android:hint="Enter password"
-        android:id="@+id/passwordEdit"
+        android:id="@+id/ed_password"
         android:inputType="textPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -68,7 +80,7 @@
         android:layout_height="@dimen/mediumButtonHeight"
         android:layout_margin="30dp"
         android:text="Sign up"
-        android:id="@+id/signupBtn" />
+        android:id="@+id/btn_register" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
