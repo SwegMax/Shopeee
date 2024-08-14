@@ -30,7 +30,7 @@ class RegisterViewModel @Inject constructor(
     private val validationChannel = Channel<RegisterFieldState>()
     val validation = validationChannel.receiveAsFlow()
 
-    fun register(user: User, password: String) {
+    fun createAccountWithEmailAndPassword(user: User, password: String) {
         if (checkValidation(user, password)) {
             runBlocking { registerStateFlow.emit(Resource.Loading()) }
             firebaseAuth.createUserWithEmailAndPassword(user.email, password)

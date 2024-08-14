@@ -31,41 +31,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        binding.apply{
-            loginBtn.setOnClickListener{
-                val email = userEdit.text.toString().trim()
-                val password = passwordEdit.text.toString()
-                viewModel.login(email, password)
-            }
-        }
-
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // This block will be executed whenever the lifecycle is at least in the STARTED state
-                viewModel.login.collect {
-                    when (it) {
-                        is Resource.Success -> {
-                            Intent(requireActivity(), ShoppingActivity::class.java).also {intent ->
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                                //won't let users logout by pressing back, exits app
-                                startActivity(intent)
-                            }
-                            Log.d(null, "Login onClickListener success")
-                        }
-                        is Resource.Error -> {
-                            // Update UI for error state
-                            Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_LONG).show()
-                            Log.d(null, "Login onClickListener failed")
-                        }
-                        else -> {
-                            Log.d(null, "Login onClickListener failed")
-                        }
-                    }
-                }
-            }
-        }
 
     }
 }

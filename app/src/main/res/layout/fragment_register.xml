@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
-        app:layout_constraintBottom_toTopOf="@+id/userEdit"
+        app:layout_constraintBottom_toTopOf="@+id/edFirstNameRegister"
         android:textAlignment="center"
         android:gravity="center"
         android:textSize="25sp"
@@ -28,59 +28,59 @@
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/text_lets_sign_up"
-        app:layout_constraintBottom_toTopOf="@+id/userEdit"
+        app:layout_constraintBottom_toTopOf="@+id/edLastNameRegister"
         style="@style/editText"
         android:layout_margin="20dp"
-        android:hint="Enter first name"
-        android:id="@+id/ed_first_name" />
+        android:hint="First Name"
+        android:id="@+id/edFirstNameRegister" />
     
     <EditText
         android:layout_width="0dp"
         android:layout_height="@dimen/editTextHeight"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/text_lets_sign_up"
-        app:layout_constraintBottom_toTopOf="@+id/userEdit"
+        app:layout_constraintTop_toBottomOf="@+id/edFirstNameRegister"
+        app:layout_constraintBottom_toTopOf="@+id/edEmailRegister"
         style="@style/editText"
         android:layout_margin="20dp"
-        android:hint="Enter name"
-        android:id="@+id/ed_last_name" />
+        android:hint="Last Name"
+        android:id="@+id/edLastNameRegister" />
 
     <EditText
         android:layout_width="0dp"
         android:layout_height="@dimen/editTextHeight"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/nameEdit"
-        app:layout_constraintBottom_toTopOf="@+id/passwordEdit"
+        app:layout_constraintTop_toBottomOf="@+id/edLastNameRegister"
+        app:layout_constraintBottom_toTopOf="@+id/edPasswordRegister"
         style="@style/editText"
         android:layout_margin="20dp"
-        android:hint="Enter email"
-        android:id="@+id/ed_email" />
+        android:hint="Email"
+        android:id="@+id/edEmailRegister" />
 
     <EditText
         android:layout_width="0dp"
         android:layout_height="@dimen/editTextHeight"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/userEdit"
-        app:layout_constraintBottom_toTopOf="@+id/signupBtn"
+        app:layout_constraintTop_toBottomOf="@+id/edEmailRegister"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegisterRegister"
         style="@style/editText"
         android:layout_margin="20dp"
-        android:hint="Enter password"
-        android:id="@+id/ed_password"
+        android:hint="Password"
+        android:id="@+id/edPasswordRegister"
         android:inputType="textPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEdit"
+        app:layout_constraintTop_toBottomOf="@+id/edPasswordRegister"
         style="@style/blueButtonStyle"
         android:layout_width="0dp"
         android:layout_height="@dimen/mediumButtonHeight"
         android:layout_margin="30dp"
         android:text="Sign up"
-        android:id="@+id/btn_register" />
+        android:id="@+id/buttonRegisterRegister" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"

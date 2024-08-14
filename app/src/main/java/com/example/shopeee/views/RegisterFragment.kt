@@ -7,18 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.shopeee.databinding.FragmentRegisterBinding
-import com.example.shopeee.repository.RegisterValidation
+import com.example.shopeee.repository.AnimationUtils
 import com.example.shopeee.repository.Resource
 import com.example.shopeee.repository.User
 import com.example.shopeee.viewmodelMVVM.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -36,15 +31,15 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply{
-            signupBtn.setOnClickListener{
+        binding.apply {
+            buttonRegisterRegister.setOnClickListener {
                 val user = User(
-                    nameEdit.text.toString().trim(),
-                    "lastNamePlaceHolder",
-                    "emailPlaceHolder"
+                    edFirstNameRegister.text.toString().trim(),
+                    edLastNameRegister.text.toString().trim(),
+                    edEmailRegister.text.toString().trim()
                 )
-                val password = passwordEdit.text.toString().trim()
-                viewModel.register(user, password)
+                val password = edPasswordRegister.text.toString()
+                viewModel.createAccountWithEmailAndPassword(user, password)
             }
         }
 
@@ -52,46 +47,18 @@ class RegisterFragment : Fragment() {
             viewModel.register.collect {
                 when (it) {
                     is Resource.Loading -> {
-                        // Update UI to show loading state
-                        // For example: binding.signupBtn.startAnimation()
+                        binding.buttonRegisterRegister.startAnimation(AnimationUtils.loadingShake(context))
                     }
                     is Resource.Success -> {
-                        // Update UI for success state
-                        Log.d(null, "Register onClickListener success")
+                        Log.d("test", it.data.toString())
+                        binding.buttonRegisterRegister.startAnimation(AnimationUtils.successShake(context))
                     }
                     is Resource.Error -> {
-                        // Update UI for error state
-                        Log.d(null, "Register onClickListener failed")
-                    }
-                    else -> {
-                        Log.d(null, "Register onClickListener failed")
-                    }
-                }
-            }
-        }
+                        Log.d("test", it.data.toString())
+                        binding.buttonRegisterRegister.startAnimation(AnimationUtils.errorShake(context))
 
-
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // This block will be executed whenever the lifecycle is at least in the STARTED state
-                viewModel.validation.collect { validation ->
-                    if(validation.username is RegisterValidation.Failed) {
-                        withContext(Dispatchers.Main) {
-                            binding.nameEdit.apply {
-                                requestFocus()
-                                error = validation.username.message
-                            }
-                        }
                     }
-
-                    if(validation.password is RegisterValidation.Failed) {
-                        withContext(Dispatchers.Main) {
-                            binding.passwordEdit.apply {
-                                requestFocus()
-                                error = validation.password.message
-                            }
-                        }
-                    }
+                    else -> {}
                 }
             }
         }
