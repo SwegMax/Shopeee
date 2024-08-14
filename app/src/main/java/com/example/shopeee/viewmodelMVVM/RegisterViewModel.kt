@@ -24,15 +24,17 @@ class RegisterViewModel @Inject constructor(
         private val db:FirebaseFirestore
 ): ViewModel() {
 
-    private val registerStateFlow = MutableStateFlow<Resource<User>>(Resource.Loading())
-    val register: Flow<Resource<User>> = registerStateFlow
+    private val _register = MutableStateFlow<Resource<User>>(Resource.Loading())
+    val register: Flow<Resource<User>> = _register
 
-    private val validationChannel = Channel<RegisterFieldState>()
-    val validation = validationChannel.receiveAsFlow()
+    private val _validation = Channel<RegisterFieldState>()
+    val validation = _validation.receiveAsFlow()
 
     fun createAccountWithEmailAndPassword(user: User, password: String) {
         if (checkValidation(user, password)) {
-            runBlocking { registerStateFlow.emit(Resource.Loading()) }
+            runBlocking {
+                _register.emit(Resource.Loading())
+            }
             firebaseAuth.createUserWithEmailAndPassword(user.email, password)
                     .addOnSuccessListener {
                         it.user?.let {
@@ -40,8 +42,7 @@ class RegisterViewModel @Inject constructor(
                         }
                     }
                     .addOnFailureListener {
-                        registerStateFlow.value = Resource.Error(it.toString())
-                        //supposed to have .message in the middle
+                        _register.value = Resource.Error(it.message.toString())
                     }
 
         } else {
@@ -49,7 +50,7 @@ class RegisterViewModel @Inject constructor(
                 validateEmail(user.email), validatePassword(password)
             )
             runBlocking {
-                validationChannel.send(registerFieldState)
+                _validation.send(registerFieldState)
             }
         }
     }
@@ -59,10 +60,10 @@ class RegisterViewModel @Inject constructor(
                 .document(userUid)
                 .set(user)
                 .addOnSuccessListener {
-                    registerStateFlow.value = Resource.Success(user)
+                    _register.value = Resource.Success(user)
                 }
                 .addOnFailureListener {
-                    registerStateFlow.value = Resource.Error(it.toString())
+                    _register.value = Resource.Error(it.toString())
                 }
     }
 
