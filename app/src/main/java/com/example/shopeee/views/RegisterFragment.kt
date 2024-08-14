@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.example.shopeee.R
 import com.example.shopeee.databinding.FragmentRegisterBinding
 import com.example.shopeee.repository.AnimationUtils
 import com.example.shopeee.repository.RegisterValidation
@@ -36,6 +38,10 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.tvDoYouHaveAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
         binding.apply {
             buttonRegisterRegister.setOnClickListener {

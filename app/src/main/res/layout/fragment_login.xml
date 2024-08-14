@@ -16,11 +16,11 @@
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
-        app:layout_constraintBottom_toTopOf="@+id/userEdit"
+        app:layout_constraintBottom_toTopOf="@+id/edEmailLogin"
         android:textAlignment="center"
         android:gravity="center"
         android:textSize="25sp"
-        android:text="Login here"
+        android:text="Log in here!"
         android:textColor="@color/black" />
 
     <EditText
@@ -29,34 +29,50 @@
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/text_lets_login"
-        app:layout_constraintBottom_toTopOf="@+id/passwordEdit"
+        app:layout_constraintBottom_toTopOf="@+id/edPasswordLogin"
         style="@style/editText"
         android:layout_margin="20dp"
-        android:hint="Enter email"
-        android:id="@+id/userEdit" />
+        android:hint="Email"
+        android:id="@+id/edEmailLogin" />
 
     <EditText
         android:layout_width="0dp"
         android:layout_height="@dimen/editTextHeight"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/userEdit"
-        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        app:layout_constraintTop_toBottomOf="@+id/edEmailLogin"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLoginLogin"
         android:layout_margin="20dp"
-        android:hint="Enter password"
-        android:id="@+id/passwordEdit"
+        android:hint="Password"
+        android:id="@+id/edPasswordLogin"
         android:inputType="textPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginBtn"
+        android:id="@+id/buttonLoginLogin"
         android:layout_width="0dp"
         android:layout_height="@dimen/mediumButtonHeight"
         android:text="Login"
         style="@style/blueButtonStyle"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEdit"
+        app:layout_constraintTop_toBottomOf="@+id/edPasswordLogin"
         android:layout_margin="30dp"/>
+
+    <TextView
+        android:id="@+id/tvDontHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:text="Don't have an account? Click here"
+        android:textColor="@color/g_hint"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/buttonLoginLogin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"

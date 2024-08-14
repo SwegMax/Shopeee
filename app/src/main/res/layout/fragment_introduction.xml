@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signupRedirectBtn"
+        android:id="@+id/buttonLoginAccOptions"
         android:layout_width="@dimen/smallButtonWidth"
         android:layout_height="@dimen/smallButtonHeight"
         style="@style/blueButtonStyle"
@@ -33,13 +33,13 @@
         android:text="Sign Up" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginRedirectBtn"
+        android:id="@+id/buttonRegisterAccOptions"
         android:layout_width="@dimen/smallButtonWidth"
         android:layout_height="@dimen/smallButtonHeight"
         style="@style/whiteButtonStyle"
         app:layout_constraintStart_toStartOf="@id/appName"
         app:layout_constraintEnd_toEndOf="@id/appName"
-        app:layout_constraintTop_toBottomOf="@id/signupRedirectBtn"
+        app:layout_constraintTop_toBottomOf="@id/buttonLoginAccOptions"
         android:layout_marginTop="10dp"
         android:text="Login" />
 

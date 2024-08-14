@@ -26,13 +26,11 @@ class IntroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            signupRedirectBtn.setOnClickListener {
-                findNavController().navigate(R.id.action_introFragment_to_registerFragment)
-            }
-            loginRedirectBtn.setOnClickListener {
-                findNavController().navigate(R.id.action_introFragment_to_loginFragment)
-            }
+        binding.buttonRegisterAccOptions.setOnClickListener {
+            findNavController().navigate(R.id.action_introFragment_to_registerFragment)
+        }
+        binding.buttonLoginAccOptions.setOnClickListener {
+            findNavController().navigate(R.id.action_introFragment_to_loginFragment)
         }
 
     }
