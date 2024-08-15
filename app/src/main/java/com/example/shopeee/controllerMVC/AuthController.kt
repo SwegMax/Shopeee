@@ -32,8 +32,8 @@ class AuthController(private val context: Context, private val app : App) {
 
 
 
-        val email = loginBinding!!.userEdit.text.toString()
-        val password = loginBinding!!.passwordEdit.text.toString()
+        val email = loginBinding!!.edEmailLogin.text.toString()
+        val password = loginBinding!!.edPasswordLogin.text.toString()
 
         val credentials = Credentials.emailPassword(email,password)
         app.loginAsync(credentials){result ->
@@ -85,8 +85,8 @@ class AuthController(private val context: Context, private val app : App) {
         val builder = AlertDialog.Builder(context)
         builder.setView(signUpBinding!!.root).show()
 
-        val email = signUpBinding!!.userEdit.text.toString()
-        val password = signUpBinding!!.passwordEdit.text.toString()
+        val email = signUpBinding!!.edEmailRegister.text.toString()
+        val password = signUpBinding!!.edPasswordRegister.text.toString()
 
         app.emailPassword.registerUserAsync(email,password) {result ->
             if (result.error == null) {
@@ -100,33 +100,3 @@ class AuthController(private val context: Context, private val app : App) {
         }
     }
 }
-
-
-/*val loginBtn = loginBinding!!.loginBtn
-       val emailEdit = loginBinding!!.emailEdit
-       val passwordEdit = loginBinding!!.passwordEdit
-
-       loginBtn.setOnClickListener {
-           val map = HashMap<String, String>()
-           map["email"] = emailEdit.text.toString()
-           map["password"] = passwordEdit.text.toString()
-
-           val call = retrofitInterface!!.executeLogin(map)
-           call.enqueue(object : Callback<LoginResult?> {
-               override fun onResponse(call: Call<LoginResult?>, response: Response<LoginResult?>) {
-                   if (response.code() == 200) {
-                       val result = response.body()
-                       val builder1 = AlertDialog.Builder(context)
-                       builder1.setTitle(result!!.name)
-                       builder1.setMessage(result.email)
-                       builder1.show()
-                   } else if (response.code() == 404) {
-                       Toast.makeText(context, "Wrong username or password", Toast.LENGTH_LONG).show()
-                   }
-               }
-
-               override fun onFailure(call: Call<LoginResult?>, t: Throwable) {
-                   Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
-               }
-           })
-       }*/
