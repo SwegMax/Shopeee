@@ -2,7 +2,6 @@ package com.example.shopeee.views
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.shopeee.R
@@ -17,7 +16,7 @@ class ShoppingActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping)
 
-        val navController = findNavController(R.id.host_fragment)
+        val navController = findNavController(R.id.shoppingHostFragment)
         binding.bottomNavigation.setupWithNavController(navController)
     }
 }
