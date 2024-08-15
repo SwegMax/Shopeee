@@ -1,10 +1,12 @@
 package com.example.shopeee.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -64,6 +66,12 @@ class RegisterFragment : Fragment() {
                     is Resource.Success -> {
                         Log.d("test", it.data.toString())
                         binding.buttonRegisterRegister.startAnimation(AnimationUtils.successShake(context))
+                        Intent(requireActivity(), ShoppingActivity::class.java).also { intent ->
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            //won't let users logout by pressing back, exits app
+                            startActivity(intent)
+                        }
+                        Toast.makeText(requireContext(), "Register Success", Toast.LENGTH_LONG).show()
                     }
                     is Resource.Error -> {
                         Log.d("test", it.data.toString())
