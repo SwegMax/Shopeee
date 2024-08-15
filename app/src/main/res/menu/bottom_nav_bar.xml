@@ -4,17 +4,17 @@
     <item
         android:title="Home"
         android:id="@+id/homeFragment"
-        android:icon="@drawable/baseline_accessibility_24"
+        android:icon="@drawable/ic_home"
         />
     <item
         android:title="Search"
         android:id="@+id/searchFragment"
-        android:icon="@drawable/baseline_accessibility_24"
+        android:icon="@drawable/ic_search"
         />
     <item
         android:title="Cart"
         android:label="CartFragment"
-        android:icon="@drawable/baseline_add_shopping_cart_24"/>
+        android:icon="@drawable/ic_cart"/>
     <item
         android:title="Profile"
         android:id="@+id/profileFragment"
