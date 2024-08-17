@@ -19,8 +19,10 @@ import com.example.shopeee.adapter.BestProductsAdapter
 import com.example.shopeee.databinding.FragmentMainCategoryBinding
 import com.example.shopeee.repository.Resource
 import com.example.shopeee.viewmodelMVVM.MainCategoryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
+@AndroidEntryPoint
 class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
     private lateinit var binding: FragmentMainCategoryBinding
     private lateinit var bestDealsAdapter: BestDealsAdapter

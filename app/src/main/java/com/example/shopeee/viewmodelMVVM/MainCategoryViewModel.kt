@@ -5,11 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.shopeee.repository.Product
 import com.example.shopeee.repository.Resource
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MainCategoryViewModel @Inject constructor(
     private val firestore: FirebaseFirestore
 ) : ViewModel() {
