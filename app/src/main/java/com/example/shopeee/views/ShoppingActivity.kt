@@ -1,15 +1,12 @@
 package com.example.shopeee.views
 
-import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.shopeee.R
 import com.example.shopeee.databinding.ActivityShoppingBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ShoppingActivity : AppCompatActivity() {
 
@@ -20,11 +17,15 @@ class ShoppingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        /*val navController = findNavController(R.id.shoppingHostFragment)
-        binding.bottomNavigation.setupWithNavController(navController)*/
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.shoppingHostFragment) as? NavHostFragment
+        val navController = navHostFragment?.navController
 
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        val navController = Navigation.findNavController(this, R.id.shoppingHostFragment)
-        NavigationUI.setupWithNavController(bottomNavigation, navController)
+        if (navController != null) {
+            binding.bottomNavigation.setupWithNavController(navController)
+        } else {
+            Log.e("ShoppingActivity", "NavController not found")
+        }
+
+
     }
 }
