@@ -5,7 +5,6 @@
     android:id="@+id/shopping_graph"
     app:startDestination="@id/homeFragment">
 
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.shopeee.views.HomeFragment"
@@ -22,9 +21,9 @@
         android:label="CartFragment"
         tools:layout="@layout/fragment_cart" />
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.shopeee.views.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/logoutFragment"
+        android:name="com.example.shopeee.views.LogoutFragment"
+        android:label="fragment_logout"
+        tools:layout="@layout/fragment_logout" />
 
 </navigation>

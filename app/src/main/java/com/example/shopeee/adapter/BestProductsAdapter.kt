@@ -30,7 +30,7 @@ class BestProductsAdapter: RecyclerView.Adapter<BestProductsAdapter.BestProducts
                     tvPrice.text = "$ ${product.price}"
                     tvName.text = product.name
                 } else {
-                    imgProduct.setImageResource(R.drawable.test_image)
+                    imgProduct.setImageResource(R.drawable.alpha_s_box)
                 }
             }
         }

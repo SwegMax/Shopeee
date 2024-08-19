@@ -13,10 +13,11 @@
         />
     <item
         android:title="Cart"
-        android:label="CartFragment"
+        android:label="Cart Fragment"
+        android:id="@+id/cartFragment"
         android:icon="@drawable/ic_cart"/>
     <item
-        android:title="Profile"
-        android:id="@+id/profileFragment"
+        android:title="Logout"
+        android:id="@+id/logoutFragment"
         android:icon="@drawable/baseline_logout_24"/>
 </menu>
