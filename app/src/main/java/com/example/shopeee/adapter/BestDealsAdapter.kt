@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopeee.R
 import com.example.shopeee.databinding.BestDealsRvItemBinding
 import com.example.shopeee.repository.Product
 
@@ -13,14 +14,19 @@ class BestDealsAdapter: RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolde
     inner class BestDealsViewHolder(private val binding: BestDealsRvItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) { //i think product was initialised in the previous
             binding.apply {
-                Glide.with(itemView).load(product.images[0]).into(imgBestDeal)
-                product.offerPercentage?.let{
-                    val remainingPricePercentage = 1f - it
-                    val priceAfterOffer = remainingPricePercentage * product.price
-                    tvNewPrice.text = "$ ${String.format("%.2f", priceAfterOffer)}"
+                if (product.images.isNotEmpty()) {
+                    Glide.with(itemView).load(product.images[0]).into(imgBestDeal)
+                    product.offerPercentage?.let{
+                        val remainingPricePercentage = 1f - it
+                        val priceAfterOffer = remainingPricePercentage * product.price
+                        tvNewPrice.text = "$ ${String.format("%.2f", priceAfterOffer)}"
+                    }
+                    tvOldPrice.text = "$ ${product.price}"
+                    tvDealProductName.text = product.name
+                } else {
+                    imgBestDeal.setImageResource(R.drawable.blue_background)
                 }
-                tvOldPrice.text = "$ ${product.price}"
-                tvDealProductName.text = product.name
+
             }
         }
     }
