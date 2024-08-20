@@ -3,11 +3,11 @@ package com.example.shopeee.views
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -30,4 +30,40 @@ class LogoutFragment : Fragment(R.layout.fragment_logout) {
         binding = FragmentLogoutBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonLogout.setOnClickListener {
+            viewModel.logout()
+        }
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.login.collect {
+                    when (it) {
+                        is Resource.Loading -> {
+                            binding.buttonLogout.startAnimation(AnimationUtils.loadingShake(context))
+                        }
+                        is Resource.Success -> {
+                            // Navigate to the login page after successful logout
+                            Intent(requireActivity(), LoginRegisterActivity::class.java).also { intent ->
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
+                            }
+                        }
+                        is Resource.Error -> {
+                            binding.buttonLogout.startAnimation(AnimationUtils.loadingShake(context))
+                            Toast.makeText(requireContext(), "Logout Failed", Toast.LENGTH_LONG).show()
+                        }
+                        else -> {
+                            Log.d(null, "Logout onClickListener failed")
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
 }
