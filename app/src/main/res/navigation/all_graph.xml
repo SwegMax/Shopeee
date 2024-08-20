@@ -14,5 +14,5 @@
         android:id="@+id/profile2"
         android:name="com.example.shopeee.views.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_logout" />
 </navigation>
