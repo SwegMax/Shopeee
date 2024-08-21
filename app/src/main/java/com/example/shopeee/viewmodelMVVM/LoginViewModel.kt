@@ -36,11 +36,4 @@ class LoginViewModel @Inject constructor(
                 }
             }
     }
-
-    fun logout() {
-        viewModelScope.launch {
-            _login.emit(Resource.Loading())
-            firebaseAuth.signOut()
-        }
-    }
 }
