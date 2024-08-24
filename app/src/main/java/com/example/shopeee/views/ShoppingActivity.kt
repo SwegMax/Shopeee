@@ -27,7 +27,5 @@ class ShoppingActivity : AppCompatActivity() {
         } else {
             Log.e("ShoppingActivity", "NavController not found")
         }
-
-
     }
 }
