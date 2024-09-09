@@ -19,18 +19,6 @@ class LoginViewModel @Inject constructor(
     private val _login = MutableSharedFlow<Resource<FirebaseUser>>()
     val login = _login.asSharedFlow()
 
-    init {
-        // Check if the user is already logged in when the ViewModel is created
-        viewModelScope.launch {
-            val currentUser = firebaseAuth.currentUser
-            if (currentUser != null) {
-                _login.emit(Resource.Success(currentUser))
-            } else {
-                _login.emit(Resource.Error("No user logged in"))
-            }
-        }
-    }
-
     fun login(email: String, password: String) {
         viewModelScope.launch {
             _login.emit(Resource.Loading())
@@ -48,6 +36,4 @@ class LoginViewModel @Inject constructor(
                 }
             }
     }
-
-
 }
