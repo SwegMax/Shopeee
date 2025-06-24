@@ -3,6 +3,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.shopeee.R
 import com.example.shopeee.databinding.FragmentLoginBinding
 import com.example.shopeee.databinding.FragmentRegisterBinding
 import com.example.shopeee.interfaces.RetrofitInterface
@@ -38,7 +40,8 @@ class AuthController(private val context: Context, private val app : App) {
         val credentials = Credentials.emailPassword(email,password)
         app.loginAsync(credentials){result ->
             if (result.error == null) {
-                Toast.makeText(context, "Logged in as ${result.get().id}",
+                val loginMsg = context.getString(R.string.login_msg)
+                Toast.makeText(context, loginMsg,
                         Toast.LENGTH_SHORT).show()
                 //Get user session
                 val userSession = result.get()

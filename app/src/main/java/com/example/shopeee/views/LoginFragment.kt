@@ -18,6 +18,8 @@ import com.example.shopeee.databinding.FragmentLoginBinding
 import com.example.shopeee.repository.AnimationUtils
 import com.example.shopeee.repository.Resource
 import com.example.shopeee.viewmodelMVVM.LoginViewModel
+import com.example.shopeee.views.dialog.setupBottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -47,6 +49,29 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         }
 
+        binding.tvForgotPasswordLogin.setOnClickListener {
+            setupBottomSheetDialog { email ->
+                viewModel.resetPassword(email)
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.resetPassword.collect{
+                when(it) {
+                    is Resource.Loading -> {
+
+                    }
+                    is Resource.Success -> {
+                        Snackbar.make(requireView(), " Reset link was sent to your email", Snackbar.LENGTH_LONG).show()
+                    }
+                    is Resource.Error -> {
+                        Snackbar.make(requireView(), " Error: Cannot reset password", Snackbar.LENGTH_LONG).show()
+                    }
+                    else -> Unit
+                }
+            }
+        }
+
         //can be replaced with launchWhenStarted
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -58,6 +83,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         }
                         is Resource.Success -> {
                             binding.buttonLoginLogin.startAnimation(AnimationUtils.successShake(context))
+                            //revertAnimation()?
                             Intent(requireActivity(), ShoppingActivity::class.java).also { intent ->
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                 //won't let users logout by pressing back, exits app
