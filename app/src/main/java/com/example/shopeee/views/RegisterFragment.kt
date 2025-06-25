@@ -38,6 +38,8 @@ class RegisterFragment : Fragment() {
         return binding.root
     }
 
+    //add user has signed up successfully and renavigate to shopping page or sign in
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
