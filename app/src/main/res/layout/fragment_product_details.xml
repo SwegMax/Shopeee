@@ -148,7 +148,7 @@
             android:id="@+id/buttonAddToCart"
             android:layout_width="0dp"
             android:layout_height="@dimen/mediumButtonHeight"
-            android:text="Add To Cart"
+            android:text="Add to cart"
             style="@style/blueButtonStyle"
             app:layout_constraintEnd_toEndOf="@+id/linearProductPref"
             app:layout_constraintStart_toStartOf="@+id/linearProductPref"

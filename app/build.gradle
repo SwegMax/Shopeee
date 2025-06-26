@@ -9,6 +9,7 @@ plugins {
     id 'io.realm.kotlin'
     id 'realm-android'
     id 'com.google.gms.google-services'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -105,6 +106,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
     implementation "androidx.navigation:navigation-compose:$navVersion"
+    implementation "androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion"
 
     // Lifecycle
     //implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'

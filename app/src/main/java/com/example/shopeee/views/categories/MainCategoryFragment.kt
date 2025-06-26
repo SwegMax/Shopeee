@@ -11,6 +11,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shopeee.R
@@ -18,6 +19,7 @@ import com.example.shopeee.adapter.BestDealsAdapter
 import com.example.shopeee.adapter.BestProductsAdapter
 import com.example.shopeee.databinding.FragmentMainCategoryBinding
 import com.example.shopeee.repository.Resource
+import com.example.shopeee.repository.showBottomNavigationView
 import com.example.shopeee.viewmodelMVVM.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -40,6 +42,16 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
 
         setupBestDealsRv()
         setupBestProducts()
+
+        bestProductsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
+        }
+
+        bestDealsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
+        }
 
         lifecycleScope.launchWhenStarted {
             viewModel.bestDealsProducts.collectLatest {
@@ -111,5 +123,10 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
 
     private fun showLoading() {
         binding.mainCategoryProgressbar.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 }
