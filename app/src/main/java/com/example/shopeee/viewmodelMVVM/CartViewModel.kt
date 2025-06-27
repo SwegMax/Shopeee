@@ -2,7 +2,7 @@ package com.example.shopeee.viewmodelMVVM
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shopeee.firebase.FirebaseCommon
+import com.example.shopeee.repository.firebase.FirebaseCommon
 import com.example.shopeee.helper.getProductPrice
 import com.example.shopeee.repository.CartProduct
 import com.example.shopeee.repository.Resource

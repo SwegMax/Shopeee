@@ -3,7 +3,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.shopeee.R
 import com.example.shopeee.databinding.FragmentLoginBinding
 import com.example.shopeee.databinding.FragmentRegisterBinding

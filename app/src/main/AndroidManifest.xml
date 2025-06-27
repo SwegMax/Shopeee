@@ -16,13 +16,13 @@
         android:theme="@style/Theme.Shopeee"
         tools:targetApi="34">
         <activity
-            android:name=".views.ShoppingActivity"
+            android:name=".views.shopping.ShoppingActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Shopeee">
         </activity>
         <activity
-            android:name=".views.LoginRegisterActivity"
+            android:name=".views.account.LoginRegisterActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Shopeee">

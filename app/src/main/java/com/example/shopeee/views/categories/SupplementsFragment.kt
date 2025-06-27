@@ -2,10 +2,8 @@ package com.example.shopeee.views.categories
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.shopeee.R
 import com.example.shopeee.repository.Category
 import com.example.shopeee.repository.Resource
 import com.example.shopeee.viewmodelMVVM.CategoryViewModel

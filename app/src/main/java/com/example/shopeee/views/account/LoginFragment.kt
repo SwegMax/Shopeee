@@ -1,4 +1,4 @@
-package com.example.shopeee.views
+package com.example.shopeee.views.account
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +18,7 @@ import com.example.shopeee.databinding.FragmentLoginBinding
 import com.example.shopeee.repository.AnimationUtils
 import com.example.shopeee.repository.Resource
 import com.example.shopeee.viewmodelMVVM.LoginViewModel
+import com.example.shopeee.views.shopping.ShoppingActivity
 import com.example.shopeee.views.dialog.setupBottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

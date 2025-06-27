@@ -1,4 +1,4 @@
-package com.example.shopeee.views
+package com.example.shopeee.views.shopping
 
 import android.os.Bundle
 import android.util.Log

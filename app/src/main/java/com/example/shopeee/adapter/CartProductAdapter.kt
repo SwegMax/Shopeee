@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.example.shopeee.databinding.CartProductItemBinding
 import com.example.shopeee.helper.getProductPrice
 import com.example.shopeee.repository.CartProduct
-import com.example.shopeee.repository.Product
 
 class CartProductAdapter: RecyclerView.Adapter<CartProductAdapter.CartProductsViewHolder>() {
 

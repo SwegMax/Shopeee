@@ -6,18 +6,9 @@ data class Item(
         var id : Long,
         var quantity: Int)
 
-/*data class User(
-        val userId: String = "",
-        val username: String,
-        var items: List<Item> = emptyList()
-)*/
-
-//@Parcelize
 data class User(
         var firstName:String,
         var lastName:String,
         var email:String,
         var imagePath:String=""
-)/* Parcelable {
-    constructor() : this("","","")
-}*/
+)

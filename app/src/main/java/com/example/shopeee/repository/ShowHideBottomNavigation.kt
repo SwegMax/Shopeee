@@ -3,7 +3,7 @@ package com.example.shopeee.repository
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.shopeee.R
-import com.example.shopeee.views.ShoppingActivity
+import com.example.shopeee.views.shopping.ShoppingActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 fun Fragment.hideBottomNavigationView() {

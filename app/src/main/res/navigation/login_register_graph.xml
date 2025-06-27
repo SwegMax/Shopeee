@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.shopeee.views.LoginFragment"
+        android:name="com.example.shopeee.views.account.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.shopeee.views.RegisterFragment"
+        android:name="com.example.shopeee.views.account.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.example.shopeee.views.IntroFragment"
+        android:name="com.example.shopeee.views.account.IntroFragment"
         android:label="fragment_introduction"
         tools:layout="@layout/fragment_introduction" >
         <action

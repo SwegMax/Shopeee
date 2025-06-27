@@ -1,4 +1,4 @@
-package com.example.shopeee.views
+package com.example.shopeee.views.account
 
 import android.content.Intent
 import android.os.Bundle
@@ -20,6 +20,7 @@ import com.example.shopeee.repository.RegisterValidation
 import com.example.shopeee.repository.Resource
 import com.example.shopeee.repository.User
 import com.example.shopeee.viewmodelMVVM.RegisterViewModel
+import com.example.shopeee.views.shopping.ShoppingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

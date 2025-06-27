@@ -1,4 +1,4 @@
-package com.example.shopeee.views
+package com.example.shopeee.views.shopping
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shopeee.R
 import com.example.shopeee.adapter.CartProductAdapter
 import com.example.shopeee.databinding.FragmentCartBinding
-import com.example.shopeee.firebase.FirebaseCommon
+import com.example.shopeee.repository.firebase.FirebaseCommon
 import com.example.shopeee.repository.Resource
 import com.example.shopeee.repository.VerticalItemDecoration
 import com.example.shopeee.viewmodelMVVM.CartViewModel
@@ -64,7 +64,11 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         }
 
         binding.buttonCheckout.setOnClickListener {
-            val action = CartFragmentDirections.actionCartFragmentToBillingFragment(totalPrice, cartAdapter.differ.currentList.toTypedArray())
+            val action =
+                CartFragmentDirections.actionCartFragmentToBillingFragment(
+                    totalPrice,
+                    cartAdapter.differ.currentList.toTypedArray()
+                )
             findNavController().navigate(action)
         }
 

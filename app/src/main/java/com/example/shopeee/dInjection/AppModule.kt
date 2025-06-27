@@ -1,6 +1,6 @@
 package com.example.shopeee.dInjection
 
-import com.example.shopeee.firebase.FirebaseCommon
+import com.example.shopeee.repository.firebase.FirebaseCommon
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore

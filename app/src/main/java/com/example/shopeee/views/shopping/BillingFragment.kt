@@ -1,4 +1,4 @@
-package com.example.shopeee.views
+package com.example.shopeee.views.shopping
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,9 +16,9 @@ import com.example.shopeee.R
 import com.example.shopeee.adapter.AddressAdapter
 import com.example.shopeee.adapter.BillingProductsAdapter
 import com.example.shopeee.databinding.FragmentBillingBinding
-import com.example.shopeee.repository.CartProduct
 import com.example.shopeee.repository.HorizontalItemDecoration
 import com.example.shopeee.repository.Resource
+import com.example.shopeee.repository.CartProduct
 import com.example.shopeee.viewmodelMVVM.BillingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

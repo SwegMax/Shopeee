@@ -1,4 +1,4 @@
-package com.example.shopeee.views
+package com.example.shopeee.views.account
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shopeee.R
+import com.example.shopeee.views.shopping.ShoppingActivity
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 

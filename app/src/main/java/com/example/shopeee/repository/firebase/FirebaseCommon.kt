@@ -1,4 +1,4 @@
-package com.example.shopeee.firebase
+package com.example.shopeee.repository.firebase
 
 import com.example.shopeee.repository.CartProduct
 import com.google.firebase.auth.FirebaseAuth

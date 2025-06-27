@@ -1,4 +1,4 @@
-package com.example.shopeee.views
+package com.example.shopeee.views.account
 
 import android.content.Intent
 import android.os.Bundle

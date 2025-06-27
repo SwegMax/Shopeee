@@ -51,6 +51,7 @@ configurations.all {
     resolutionStrategy {
         force 'androidx.core:core:1.12.0'
     }
+    all*.exclude group: 'com.google.api.grpc', module: 'proto-google-common-protos'
 }
 
 java {
@@ -106,7 +107,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
     implementation "androidx.navigation:navigation-compose:$navVersion"
-    implementation "androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion"
 
     // Lifecycle
     //implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'

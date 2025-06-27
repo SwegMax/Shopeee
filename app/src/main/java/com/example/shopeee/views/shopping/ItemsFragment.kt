@@ -1,4 +1,4 @@
-package com.example.shopeee.views
+package com.example.shopeee.views.shopping
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
