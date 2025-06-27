@@ -36,20 +36,6 @@
             app:destination="@id/billingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/logoutFragment"
-        android:name="com.example.shopeee.views.account.LogoutFragment"
-        android:label="fragment_logout"
-        tools:layout="@layout/fragment_logout" >
-        <action
-            android:id="@+id/action_logoutFragment_to_introFragment2"
-            app:destination="@id/introFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/introFragment2"
-        android:name="com.example.shopeee.views.account.IntroFragment"
-        android:label="fragment_introduction"
-        tools:layout="@layout/fragment_introduction" />
-    <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.example.shopeee.views.shopping.ProductDetailsFragment"
         android:label="ProductDetailsFragment"
@@ -62,15 +48,27 @@
         android:id="@+id/addressFragment"
         android:name="com.example.shopeee.views.shopping.AddressFragment"
         android:label="AddressFragment"
-        tools:layout="@layout/fragment_address" />
+        tools:layout="@layout/fragment_address" >
+        <argument
+            android:name="address"
+            app:argType="com.example.shopeee.repository.Address"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.shopeee.views.shopping.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_addressFragment"
-            app:destination="@id/addressFragment" />
+            android:id="@+id/action_profileFragment_to_allOrdersFragment"
+            app:destination="@id/allOrdersFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_userAccountFragment"
+            app:destination="@id/userAccountFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_billingFragment"
+            app:destination="@id/billingFragment" />
     </fragment>
     <fragment
         android:id="@+id/billingFragment"
@@ -86,6 +84,9 @@
         <argument
             android:name="products"
             app:argType="com.example.shopeee.repository.CartProduct[]" />
+        <argument
+            android:name="payment"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/userAccountFragment"
