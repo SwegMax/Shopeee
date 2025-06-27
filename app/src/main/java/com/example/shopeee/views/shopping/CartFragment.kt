@@ -113,11 +113,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
                     else -> Unit
-
-                    }
                 }
             }
         }
+    }
 
     private fun showOtherViews() {
         binding.apply {

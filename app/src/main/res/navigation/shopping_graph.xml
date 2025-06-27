@@ -87,5 +87,28 @@
             android:name="products"
             app:argType="com.example.shopeee.repository.CartProduct[]" />
     </fragment>
+    <fragment
+        android:id="@+id/userAccountFragment"
+        android:name="com.example.shopeee.views.settings.UserAccountFragment"
+        android:label="UserAccountFragment"
+        tools:layout="@layout/fragment_user_account" />
+    <fragment
+        android:id="@+id/allOrdersFragment"
+        android:name="com.example.shopeee.views.settings.AllOrdersFragment"
+        android:label="AllOrdersFragment"
+        tools:layout="@layout/fragment_orders" >
+        <action
+            android:id="@+id/action_allOrdersFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.example.shopeee.views.settings.OrderDetailsFragment"
+        android:label="OrderDetailsFragment"
+        tools:layout="@layout/fragment_order_detail" >
+        <argument
+            android:name="order"
+            app:argType="com.example.shopeee.repository.Order" />
+    </fragment>
 
 </navigation>
