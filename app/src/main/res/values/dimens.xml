@@ -3,7 +3,7 @@
     <dimen name="smallButtonWidth">110dp</dimen>
     <dimen name="smallButtonHeight">35dp</dimen>
     <dimen name="editTextHeight">12dp</dimen>
-    <dimen name="mediumButtonHeight">12dp</dimen>
+    <dimen name="mediumButtonHeight">35dp</dimen>
     <dimen name="buttonCorners">8dp</dimen>
     <dimen name="_5sdp">5dp</dimen>
 </resources>
