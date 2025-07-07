@@ -1,6 +1,5 @@
 package com.example.shopeee.viewmodelMVVM
 
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shopeee.repository.Resource
@@ -26,7 +25,7 @@ class ProfileViewModel @Inject constructor(
         getUser()
     }
 
-    fun getUser() {
+    private fun getUser() {
         viewModelScope.launch {
             _user.emit(Resource.Loading())
         }

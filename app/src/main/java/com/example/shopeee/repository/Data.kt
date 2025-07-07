@@ -7,8 +7,8 @@ data class Item(
         var quantity: Int)
 
 data class User(
-        var firstName:String,
-        var lastName:String,
-        var email:String,
-        var imagePath:String=""
+        var firstName:String = "",
+        var lastName:String = "",
+        var email:String = "",
+        var imagePath:String =""
 )
