@@ -1,11 +1,12 @@
 package com.example.shopeee.viewmodelMVVM
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shopeee.repository.firebase.FirebaseCommon
 import com.example.shopeee.helper.getProductPrice
 import com.example.shopeee.repository.CartProduct
 import com.example.shopeee.repository.Resource
+import com.example.shopeee.repository.firebase.FirebaseCommon
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -46,16 +47,26 @@ class CartViewModel @Inject constructor(
 
 
     fun deleteCartProduct(cartProduct: CartProduct) {
-        val index = cartProducts.value.data?.indexOf(cartProduct)
-        if (index != null && index != -1) {
-            val documentId = cartProductDocuments[index].id
+        val updatedSnapshot = cartProductDocuments.find { snapshot ->
+            val snapshotProduct = snapshot.toObject(CartProduct::class.java)?.product
+            snapshotProduct?.id == cartProduct.product.id
+        }
+
+        if (updatedSnapshot != null) {
+            val documentId = updatedSnapshot.id
+            viewModelScope.launch { _cartProducts.emit(Resource.Loading()) }
             firestore.collection("user").document(auth.uid!!).collection("cart")
                 .document(documentId).delete()
+        } else {
+            Log.w("CartViewModel", "Attempt to delete a product not found in cart: $cartProduct")
+            viewModelScope.launch {
+                _cartProducts.emit(Resource.Error("Could not delete product. It has already been removed."))
+            }
         }
     }
 
     private fun calculatePrice(data: List<CartProduct>): Float {
-        return data.sumByDouble { cartProduct ->
+        return data.sumOf { cartProduct -> //used to be sumByDouble
             (cartProduct.product.offerPercentage.getProductPrice(cartProduct.product.price) * cartProduct.quantity).toDouble()
         }.toFloat()
     }
@@ -66,13 +77,20 @@ class CartViewModel @Inject constructor(
 
     private fun getCartProducts() {
         viewModelScope.launch { _cartProducts.emit(Resource.Loading()) }
-        firestore.collection("user").document(auth.uid!!).collection("cart")
+        firestore.collection("user").document(auth.uid!!)
+            .collection("cart")
             .addSnapshotListener { value, error -> //check cart values every refresh, updates bottomBar too
-                if(error != null || value == null) {
-                    viewModelScope.launch { _cartProducts.emit(Resource.Error(error?.message.toString())) }
-                } else {
-                    val cartProducts = value.toObjects(CartProduct::class.java)
-                    viewModelScope.launch { _cartProducts.emit(Resource.Success(cartProducts)) }
+                if (error != null) {
+                    viewModelScope.launch { _cartProducts.emit(Resource.Error(error.message.toString())) }
+                }
+                else if (value == null || value.isEmpty) {
+                    cartProductDocuments = emptyList()
+                    viewModelScope.launch { _cartProducts.emit(Resource.Success(emptyList())) }
+                }
+                else {
+                    cartProductDocuments = value.documents
+                    val cartProductsList = value.toObjects(CartProduct::class.java)
+                    viewModelScope.launch { _cartProducts.emit(Resource.Success(cartProductsList)) }
                 }
             }
     }
@@ -81,13 +99,13 @@ class CartViewModel @Inject constructor(
         cartProduct: CartProduct,
         quantityChanging: FirebaseCommon.QuantityChanging
     ) {
-        val index = cartProducts.value.data?.indexOf(cartProduct)
+        val updatedSnapshot = cartProductDocuments.find { snapshot ->
+            val snapshotProduct = snapshot.toObject(CartProduct::class.java)
+            snapshotProduct?.product?.id == cartProduct.product.id
+        }
 
-        //user might spam button faster than state change, so indexOf might return -1
-        //fun [getCartProducts] delays will also delay _cartProducts result
-
-        if (index != null && index != -1) {
-            val documentId = cartProductDocuments[index].id
+        if (updatedSnapshot != null) {
+            val documentId = updatedSnapshot.id
             when(quantityChanging) {
                 FirebaseCommon.QuantityChanging.INCREASE -> {
                     viewModelScope.launch { _cartProducts.emit(Resource.Loading()) }
@@ -99,29 +117,28 @@ class CartViewModel @Inject constructor(
                         return
                     }
                     viewModelScope.launch { _cartProducts.emit(Resource.Loading()) }
-
                     decreaseQuantity(documentId)
                 }
             }
+        } else {
+            Log.w("CartViewModel", "Attempt to change quantity for product not found in cart: $cartProduct")
+            viewModelScope.launch {
+                _cartProducts.emit(Resource.Error("Product not found in cart. Please refresh."))
+            }
         }
-
     }
 
     private fun decreaseQuantity(documentId: String) {
-        firebaseCommon.decreaseQuantity(documentId) { result, exception ->
+        firebaseCommon.decreaseQuantity(documentId) { _, exception ->
             if (exception != null)
-                viewModelScope.launch {
-                    viewModelScope.launch { _cartProducts.emit(Resource.Error(exception.message.toString())) }
-                }
+                viewModelScope.launch { _cartProducts.emit(Resource.Error(exception.message.toString())) }
         }
     }
 
     private fun increaseQuantity(documentId: String) {
-        firebaseCommon.increaseQuantity(documentId) { result, exception ->
+        firebaseCommon.increaseQuantity(documentId) { _, exception ->
             if (exception != null)
-                viewModelScope.launch {
-                    viewModelScope.launch { _cartProducts.emit(Resource.Error(exception.message.toString())) }
-                }
+                viewModelScope.launch { _cartProducts.emit(Resource.Error(exception.message.toString())) }
         }
     }
 
