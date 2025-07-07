@@ -2,7 +2,6 @@ package com.example.shopeee.views.account
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,8 +38,6 @@ class RegisterFragment : Fragment() {
         return binding.root
     }
 
-    //add user has signed up successfully and renavigate to shopping page or sign in
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,7 +57,7 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.register.collect {
                     when (it) {
@@ -83,8 +80,8 @@ class RegisterFragment : Fragment() {
                                 //won't let users logout by pressing back, exits app
                                 startActivity(intent)
                             }
-                            Toast.makeText(requireContext(), "Register Success", Toast.LENGTH_LONG)
-                                .show()
+                            Toast.makeText(requireContext(), "Register Success - " +
+                                    "Go login with your new account", Toast.LENGTH_LONG).show()
                         }
 
                         is Resource.Error -> {
@@ -102,8 +99,8 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) { //can be replaced by legacy launchWhenStarted
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 // This block will be executed whenever the lifecycle is at least in the STARTED state
                 viewModel.validation.collect { validation ->
                     if(validation.username is RegisterValidation.Failed) {

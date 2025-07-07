@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +25,7 @@ import com.example.shopeee.repository.showBottomNavigationView
 import com.example.shopeee.viewmodelMVVM.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
@@ -53,42 +56,53 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
             findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.bestDealsProducts.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        showLoading()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bestDealsProducts.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
+
+                        is Resource.Success -> {
+                            bestDealsAdapter.differ.submitList(it.data)
+                            hideLoading()
+                        }
+
+                        is Resource.Error -> {
+                            hideLoading()
+                            Log.e(TAG, "Best Deals error")
+                            Toast.makeText(requireContext(), "Best Deals error", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        else -> Unit
                     }
-                    is Resource.Success -> {
-                        bestDealsAdapter.differ.submitList(it.data)
-                        hideLoading()
-                    }
-                    is Resource.Error -> {
-                        hideLoading()
-                        Log.e(TAG, "Best Deals error")
-                        Toast.makeText(requireContext(), "Best Deals error", Toast.LENGTH_SHORT).show()
-                    }
-                    else -> Unit
                 }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.bestProducts.collectLatest {
-                when (it) {
-                    is Resource.Loading -> {
-                        binding.bestProductsProgressbar.visibility = View.VISIBLE
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bestProducts.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            binding.bestProductsProgressbar.visibility = View.VISIBLE
+                        }
+
+                        is Resource.Success -> {
+                            bestProductsAdapter.differ.submitList(it.data)
+                            binding.bestProductsProgressbar.visibility = View.GONE
+                        }
+
+                        is Resource.Error -> {
+                            hideLoading()
+                            Log.e(TAG, "Best Products error")
+                            binding.bestProductsProgressbar.visibility = View.GONE
+                        }
+
+                        else -> Unit
                     }
-                    is Resource.Success -> {
-                        bestProductsAdapter.differ.submitList(it.data)
-                        binding.bestProductsProgressbar.visibility = View.GONE
-                    }
-                    is Resource.Error -> {
-                        hideLoading()
-                        Log.e(TAG, "Bottom Progess Bar error")
-                        binding.bestProductsProgressbar.visibility = View.GONE
-                    }
-                    else -> Unit
                 }
             }
         }

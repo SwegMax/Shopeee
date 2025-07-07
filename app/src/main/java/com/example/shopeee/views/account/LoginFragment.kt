@@ -56,25 +56,28 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.resetPassword.collect{
-                when(it) {
-                    is Resource.Loading -> {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.resetPassword.collect{
+                    when(it) {
+                        is Resource.Loading -> {
 
+                        }
+                        is Resource.Success -> {
+                            Snackbar.make(requireView(), " Reset link was sent to your email", Snackbar.LENGTH_LONG).show()
+                        }
+                        is Resource.Error -> {
+                            Snackbar.make(requireView(), " Error: Cannot reset password", Snackbar.LENGTH_LONG).show()
+                        }
+                        else -> Unit
                     }
-                    is Resource.Success -> {
-                        Snackbar.make(requireView(), " Reset link was sent to your email", Snackbar.LENGTH_LONG).show()
-                    }
-                    is Resource.Error -> {
-                        Snackbar.make(requireView(), " Error: Cannot reset password", Snackbar.LENGTH_LONG).show()
-                    }
-                    else -> Unit
                 }
             }
         }
 
-        //can be replaced with launchWhenStarted
-        lifecycleScope.launch {
+
+
+        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 // This block will be executed whenever the lifecycle is at least in the STARTED state
                 viewModel.login.collect {
