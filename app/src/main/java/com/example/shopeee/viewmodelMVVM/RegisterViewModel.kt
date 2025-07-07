@@ -1,6 +1,8 @@
 package com.example.shopeee.viewmodelMVVM
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.shopeee.handlers.validateEmail
 import com.example.shopeee.handlers.validatePassword
 import com.example.shopeee.repository.Constants.USER_COLLECTION
@@ -15,7 +17,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,24 +36,29 @@ class RegisterViewModel @Inject constructor(
 
     fun createAccountWithEmailAndPassword(user: User, password: String) {
         if (checkValidation(user, password)) {
-            runBlocking {
+            viewModelScope.launch {
                 _register.emit(Resource.Loading())
-            }
-            firebaseAuth.createUserWithEmailAndPassword(user.email, password)
-                    .addOnSuccessListener {
-                        it.user?.let {
-                            saveUserInfo(it.uid, user)
-                        }
-                    }
-                    .addOnFailureListener {
-                        _register.value = Resource.Error(it.message.toString())
+                try {
+                    val authResult = firebaseAuth.createUserWithEmailAndPassword(user.email, password).await()
+                    val firebaseUser = authResult.user
+
+                    if (firebaseUser != null) {
+                        saveUserInfo(firebaseUser.uid, user)
                     }
 
+                    _register.emit(Resource.Success(user))
+
+                } catch (e: Exception) {
+                    val errorMsg = e.message ?: "Unknown error occurred during registration"
+                    _register.emit(Resource.Error(errorMsg))
+                }
+
+                }
         } else {
             val registerFieldState = RegisterFieldState(
                 validateEmail(user.email), validatePassword(password)
             )
-            runBlocking {
+            viewModelScope.launch {
                 _validation.send(registerFieldState)
             }
         }

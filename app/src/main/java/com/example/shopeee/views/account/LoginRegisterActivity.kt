@@ -10,10 +10,13 @@ import com.example.shopeee.views.shopping.ShoppingActivity
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class LoginRegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //SecureDevice code here
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {

@@ -3,9 +3,9 @@
 android:interpolator="@android:anim/accelerate_decelerate_interpolator">
 <translate
     android:duration="300"
-    android:fromXDelta="0"
-    android:toXDelta="15"
-    android:repeatCount="7"
+    android:fromYDelta="0"
+    android:toYDelta="10"
+    android:repeatCount="3"
     android:repeatMode="reverse"/>
 </set>
 

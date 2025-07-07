@@ -60,28 +60,44 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.register.collect {
-                when (it) {
-                    is Resource.Loading -> {
-                        binding.buttonRegisterRegister.startAnimation(AnimationUtils.loadingShake(context))
-                    }
-                    is Resource.Success -> {
-                        Log.d("test", it.data.toString())
-                        binding.buttonRegisterRegister.startAnimation(AnimationUtils.successShake(context))
-                        Intent(requireActivity(), ShoppingActivity::class.java).also { intent ->
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            //won't let users logout by pressing back, exits app
-                            startActivity(intent)
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.register.collect {
+                    when (it) {
+                        is Resource.Loading -> {
+                            binding.buttonRegisterRegister.startAnimation(
+                                AnimationUtils.loadingShake(
+                                    context
+                                )
+                            )
                         }
-                        Toast.makeText(requireContext(), "Register Success", Toast.LENGTH_LONG).show()
-                    }
-                    is Resource.Error -> {
-                        Log.d("test", it.data.toString())
-                        binding.buttonRegisterRegister.startAnimation(AnimationUtils.errorShake(context))
 
+                        is Resource.Success -> {
+                            binding.buttonRegisterRegister.startAnimation(
+                                AnimationUtils.successShake(
+                                    context
+                                )
+                            )
+                            Intent(requireActivity(), ShoppingActivity::class.java).also { intent ->
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                //won't let users logout by pressing back, exits app
+                                startActivity(intent)
+                            }
+                            Toast.makeText(requireContext(), "Register Success", Toast.LENGTH_LONG)
+                                .show()
+                        }
+
+                        is Resource.Error -> {
+                            binding.buttonRegisterRegister.startAnimation(
+                                AnimationUtils.errorShake(
+                                    context
+                                )
+                            )
+                            Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_LONG).show()
+                        }
+
+                        else -> Unit
                     }
-                    else -> Unit
                 }
             }
         }
