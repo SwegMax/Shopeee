@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.shopeee.R
@@ -22,6 +24,7 @@ import com.example.shopeee.views.account.LoginRegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.grpc.android.BuildConfig
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment: Fragment() {
@@ -65,24 +68,26 @@ class ProfileFragment: Fragment() {
 
         binding.tvVersion.text = "Version ${BuildConfig.VERSION_CODE}"
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.user.collectLatest {
-                when(it) {
-                    is Resource.Loading -> {
-                        binding.progressbarSettings.visibility = View.VISIBLE
-                    }
-                    is Resource.Success -> {
-                        binding.progressbarSettings.visibility = View.GONE
-                        Glide.with(requireView()).load(it.data!!.imagePath).error(ColorDrawable(
-                            Color.BLACK)).into(binding.imageUser)
-                        binding.tvUserName.text = "${it.data.firstName} ${it.data.lastName}"
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.user.collectLatest {
+                    when(it) {
+                        is Resource.Loading -> {
+                            binding.progressbarSettings.visibility = View.VISIBLE
+                        }
+                        is Resource.Success -> {
+                            binding.progressbarSettings.visibility = View.GONE
+                            Glide.with(requireView()).load(it.data!!.imagePath).error(ColorDrawable(
+                                Color.BLACK)).into(binding.imageUser)
+                            binding.tvUserName.text = "${it.data.firstName} ${it.data.lastName}"
 
+                        }
+                        is Resource.Error -> {
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                            binding.progressbarSettings.visibility = View.VISIBLE
+                        }
+                        else -> Unit
                     }
-                    is Resource.Error -> {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                        binding.progressbarSettings.visibility = View.VISIBLE
-                    }
-                    else -> Unit
                 }
             }
         }
