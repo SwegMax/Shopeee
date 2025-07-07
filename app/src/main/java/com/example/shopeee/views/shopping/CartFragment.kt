@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +22,7 @@ import com.example.shopeee.repository.Resource
 import com.example.shopeee.repository.VerticalItemDecoration
 import com.example.shopeee.viewmodelMVVM.CartViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class CartFragment : Fragment(R.layout.fragment_cart) {
     private lateinit var binding: FragmentCartBinding
@@ -41,11 +44,13 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         setupCartRv()
 
         var totalPrice = 0f
-        lifecycleScope.launchWhenStarted {
-            viewModel.productsPrice.collectLatest { price ->
-                price?.let {
-                    totalPrice = it
-                    binding.tvTotalPrice.text = "$ $price"
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.productsPrice.collectLatest { price ->
+                    price?.let {
+                        totalPrice = it
+                        binding.tvTotalPrice.text = "$ $price"
+                    }
                 }
             }
         }
@@ -73,49 +78,59 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             findNavController().navigate(action)
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.deleteDialog.collectLatest {
-                val alertDialog = AlertDialog.Builder(requireContext()).apply {
-                    setTitle("Delete item from cart")
-                    setMessage("Do you want to delete this item from your cart?")
-                    setNegativeButton("Cancel") { dialog, _ ->
-                        dialog.dismiss()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.deleteDialog.collectLatest {
+                    val alertDialog = AlertDialog.Builder(requireContext()).apply {
+                        setTitle("Delete item from cart")
+                        setMessage("Do you want to delete this item from your cart?")
+                        setNegativeButton("Cancel") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        setPositiveButton("Yes") { dialog, _ ->
+                            viewModel.deleteCartProduct(it)
+                            dialog.dismiss()
+                        }
                     }
-                    setPositiveButton("Yes") { dialog, _ ->
-                        viewModel.deleteCartProduct(it)
-                        dialog.dismiss()
-                    }
+                    alertDialog.create()
+                    alertDialog.show()
                 }
-                alertDialog.create()
-                alertDialog.show()
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.cartProducts.collectLatest {
-                when(it) {
-                    is Resource.Loading -> {
-                        binding.progressbarCart.visibility = View.VISIBLE
-                    }
-                    is Resource.Success -> {
-                        binding.progressbarCart.visibility = View.INVISIBLE
-                        if (it.data!!.isEmpty()) {
-                            showEmptyCart()
-                            hideOtherViews()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.cartProducts.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            binding.progressbarCart.visibility = View.VISIBLE
                         }
-                        else {
-                            hideEmptyCart()
-                            showOtherViews()
-                            cartAdapter.differ.submitList(it.data)
+
+                        is Resource.Success -> {
+                            binding.progressbarCart.visibility = View.INVISIBLE
+                            if (it.data!!.isEmpty()) {
+                                showEmptyCart()
+                                hideOtherViews()
+                            } else {
+                                hideEmptyCart()
+                                showOtherViews()
+                                cartAdapter.differ.submitList(it.data)
+                            }
                         }
+
+                        is Resource.Error -> {
+                            binding.progressbarCart.visibility = View.VISIBLE
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
+
+                        else -> Unit
                     }
-                    is Resource.Error -> {
-                        binding.progressbarCart.visibility = View.VISIBLE
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    }
-                    else -> Unit
                 }
             }
+        }
+
+        binding.imageCloseCart.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 

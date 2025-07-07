@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.shopeee.databinding.FragmentAddressBinding
@@ -27,20 +29,25 @@ class AddressFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.addNewAddress.collectLatest {
-                when(it) {
-                    is Resource.Loading -> {
-                        binding.progressbarAddress.visibility = View.VISIBLE
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.addNewAddress.collectLatest {
+                    when (it) {
+                        is Resource.Loading -> {
+                            binding.progressbarAddress.visibility = View.VISIBLE
+                        }
+
+                        is Resource.Success -> {
+                            binding.progressbarAddress.visibility = View.INVISIBLE
+                            findNavController().navigateUp()
+                        }
+
+                        is Resource.Error -> {
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
+
+                        else -> Unit
                     }
-                    is Resource.Success -> {
-                        binding.progressbarAddress.visibility = View.INVISIBLE
-                        findNavController().navigateUp()
-                    }
-                    is Resource.Error -> {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    }
-                    else -> Unit
                 }
             }
         }
@@ -88,6 +95,10 @@ class AddressFragment: Fragment() {
 
                 viewModel.addAddress(address)
             }
+        }
+
+        binding.imageAddressClose.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 }
