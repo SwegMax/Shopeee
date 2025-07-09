@@ -7,29 +7,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.shopeee.R
 import com.example.shopeee.databinding.ProductRvItemBinding
+import com.example.shopeee.helper.ShimmerImgHelper
 import com.example.shopeee.helper.getProductPrice
 import com.example.shopeee.repository.Product
 
 class BestProductsAdapter: RecyclerView.Adapter<BestProductsAdapter.BestProductsViewHolder>() {
 
     inner class BestProductsViewHolder(private val binding: ProductRvItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) { //i think product was initialised in the previous
+
+        private val shimmerImgHelper: ShimmerImgHelper = ShimmerImgHelper(
+            binding.shimmerImgProduct,
+            binding.imgProduct)
+
+        fun bind(product: Product) {
             binding.apply {
-                if (product.images.isNotEmpty()) {
-                    Glide.with(itemView).load(product.images[0]).into(imgProduct)
-                    val priceAfterOffer = product.offerPercentage.getProductPrice(product.price)
-                    tvNewPrice.text = "$ ${String.format("%.2f", priceAfterOffer)}"
-                    tvPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                    if (product.offerPercentage == null)
-                        tvNewPrice.visibility = View.INVISIBLE
-                    tvPrice.text = "$ ${product.price}"
-                    tvName.text = product.name
-                } else {
-                    imgProduct.setImageResource(R.drawable.alpha_s_box)
-                }
+                shimmerImgHelper.loadImageWithShimmer(product.images.getOrNull(0))
+                val priceAfterOffer = product.offerPercentage.getProductPrice(product.price)
+                tvNewPrice.text = "$ ${String.format("%.2f", priceAfterOffer)}"
+                tvPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                if (product.offerPercentage == null)
+                    tvNewPrice.visibility = View.INVISIBLE
+                tvPrice.text = "$ ${product.price}"
+                tvName.text = product.name
             }
         }
     }

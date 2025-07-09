@@ -71,7 +71,6 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
 
                         is Resource.Error -> {
                             hideLoading()
-                            Log.e(TAG, "Best Deals error")
                             Toast.makeText(requireContext(), "Best Deals error", Toast.LENGTH_SHORT)
                                 .show()
                         }
@@ -97,7 +96,6 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
 
                         is Resource.Error -> {
                             hideLoading()
-                            Log.e(TAG, "Best Products error")
                             binding.bestProductsProgressbar.visibility = View.GONE
                         }
 

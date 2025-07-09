@@ -93,17 +93,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                                 //won't let users logout by pressing back, exits app
                                 startActivity(intent)
                             }
-                            Log.d(null, "Login onClickListener success")
                         }
 
                         is Resource.Error -> {
                             binding.buttonLoginLogin.startAnimation(AnimationUtils.loadingShake(context))
                             Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_LONG).show()
-                            Log.d(null, "Login onClickListener failed")
                         }
 
                         else -> {
-                            Log.d(null, "Login onClickListener failed")
                         }
                     }
                 }

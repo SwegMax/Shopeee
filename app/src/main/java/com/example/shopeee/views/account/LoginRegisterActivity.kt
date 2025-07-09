@@ -25,7 +25,6 @@ class LoginRegisterActivity : AppCompatActivity() {
         } else {
             setContentView(R.layout.activity_login_register)
         }
-        Log.d(TAG, "LoginRegisterActivity loaded")
     }
 
     override fun onBackPressed() {

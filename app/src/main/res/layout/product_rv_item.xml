@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="3dp"
+    android:layout_marginBottom="3dp">
 
     <ImageView
         android:id="@+id/img_product"
@@ -14,7 +15,27 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/linear_product_name"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_img_product"
+        android:layout_width="@dimen/_114sdp"
+        android:layout_height="@dimen/_108sdp"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linear_product_name"
+        app:layout_constraintDimensionRatio="W,5:6"
+        app:shimmer_auto_start="true"
+        app:shimmer_duration="1000"
+        app:shimmer_direction="left_to_right"
+        android:background="@color/shimmer_colour">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <LinearLayout
         android:id="@+id/linear_product_name"
@@ -52,7 +73,7 @@
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/sf_pro_display"
@@ -68,7 +89,7 @@
         android:id="@+id/tv_new_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/sf_pro_display"
@@ -85,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_begin="20dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRight"

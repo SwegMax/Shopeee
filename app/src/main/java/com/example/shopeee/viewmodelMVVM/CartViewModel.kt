@@ -58,7 +58,6 @@ class CartViewModel @Inject constructor(
             firestore.collection("user").document(auth.uid!!).collection("cart")
                 .document(documentId).delete()
         } else {
-            Log.w("CartViewModel", "Attempt to delete a product not found in cart: $cartProduct")
             viewModelScope.launch {
                 _cartProducts.emit(Resource.Error("Could not delete product. It has already been removed."))
             }
@@ -121,7 +120,6 @@ class CartViewModel @Inject constructor(
                 }
             }
         } else {
-            Log.w("CartViewModel", "Attempt to change quantity for product not found in cart: $cartProduct")
             viewModelScope.launch {
                 _cartProducts.emit(Resource.Error("Product not found in cart. Please refresh."))
             }
