@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.50'
-        classpath 'com.google.gms:google-services:4.4.1'
+        classpath 'com.google.gms:google-services:4.4.3'
         classpath 'io.realm:realm-gradle-plugin:10.15.1'
         classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7'
     }

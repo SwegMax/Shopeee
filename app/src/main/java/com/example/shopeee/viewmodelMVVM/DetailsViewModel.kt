@@ -62,7 +62,7 @@ class DetailsViewModel @Inject constructor(
         firebaseCommon.increaseQuantity(documentId) { _, e ->
             viewModelScope.launch {
                 if (e == null)
-                    _addToCart.emit(Resource.Success(cartProduct!!))
+                    _addToCart.emit(Resource.Success(cartProduct))
                 else
                     _addToCart.emit(Resource.Error(e.message.toString()))
             }

@@ -6,12 +6,15 @@ pluginManagement {
         maven { url 'https://jitpack.io' }
     }
 }
+
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven { url 'C:/Users/Admin/Flutter/FlutterProjects/flutter_search_module/build/host/outputs/repo' }
+        maven { url "https://storage.googleapis.com/download.flutter.io" }
     }
 }
 
