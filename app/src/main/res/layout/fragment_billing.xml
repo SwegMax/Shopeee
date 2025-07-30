@@ -216,6 +216,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.gms.wallet.button.PayButton
+            android:id="@+id/googlePayButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/totalBoxContainer"
+            app:layout_constraintStart_toStartOf="@id/totalBoxContainer"
+            app:layout_constraintEnd_toEndOf="@id/totalBoxContainer"
+            app:layout_constraintBottom_toBottomOf="@id/buttonPlaceOrder"
+            android:layout_marginBottom="20dp"/>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonPlaceOrder"
             android:layout_width="0dp"

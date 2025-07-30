@@ -98,15 +98,14 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-firestore:24.0.1'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
-    //implementation 'com.google.firebase:firebase-auth:23.0.0'
-    implementation 'com.google.firebase:firebase-storage'
-    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
-    implementation 'com.google.firebase:firebase-common-ktx:20.0.0'
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
+    implementation platform('com.google.firebase:firebase-bom:33.0.0')
 
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.firebase:firebase-common-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-functions-ktx'
 
     // Google Play Services
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
@@ -149,4 +148,8 @@ dependencies {
     debugImplementation 'com.example.flutter_search_module:flutter_debug:1.0'
     profileImplementation 'com.example.flutter_search_module:flutter_profile:1.0'
     releaseImplementation 'com.example.flutter_search_module:flutter_release:1.0'
+
+    //Google Pay
+    implementation 'com.google.android.gms:play-services-wallet:19.4.0'
+    implementation 'com.stripe:stripe-android:17.1.0'
 }

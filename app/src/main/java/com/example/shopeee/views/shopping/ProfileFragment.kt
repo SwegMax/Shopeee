@@ -22,7 +22,6 @@ import com.example.shopeee.repository.showBottomNavigationView
 import com.example.shopeee.viewmodelMVVM.ProfileViewModel
 import com.example.shopeee.views.account.LoginRegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
-import io.grpc.android.BuildConfig
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -65,8 +64,6 @@ class ProfileFragment: Fragment() {
             startActivity(intent)
             requireActivity().finish()
         }
-
-        binding.tvVersion.text = "Version ${BuildConfig.VERSION_CODE}"
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

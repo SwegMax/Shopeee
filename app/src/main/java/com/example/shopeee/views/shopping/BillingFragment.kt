@@ -21,13 +21,14 @@ import com.example.shopeee.adapter.BillingProductsAdapter
 import com.example.shopeee.databinding.FragmentBillingBinding
 import com.example.shopeee.repository.Address
 import com.example.shopeee.repository.AnimationUtils
-import com.example.shopeee.repository.HorizontalItemDecoration
-import com.example.shopeee.repository.Resource
 import com.example.shopeee.repository.CartProduct
+import com.example.shopeee.repository.HorizontalItemDecoration
 import com.example.shopeee.repository.Order
 import com.example.shopeee.repository.OrderStatus
+import com.example.shopeee.repository.Resource
 import com.example.shopeee.viewmodelMVVM.BillingViewModel
 import com.example.shopeee.viewmodelMVVM.OrderViewModel
+import com.example.shopeee.viewmodelMVVM.PaymentViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -39,6 +40,7 @@ class BillingFragment: Fragment() {
     private val addressAdapter by lazy { AddressAdapter() }
     private val billingProductsAdapter by lazy { BillingProductsAdapter() }
     private val billingViewModel by viewModels<BillingViewModel>()
+    private val paymentViewModel by viewModels<PaymentViewModel>()
     private val args by navArgs<BillingFragmentArgs>()
     private var products = emptyList<CartProduct>()
     private var totalPrice = 0f
@@ -145,7 +147,6 @@ class BillingFragment: Fragment() {
                 }
             }
         }
-
 
         billingProductsAdapter.differ.submitList(products)
 
