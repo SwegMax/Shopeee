@@ -17,7 +17,7 @@ A modern Android e-commerce app built with native Android and Flutter modules.
 ## 📷 Demo
 
 
-https://github.com/user-attachments/assets/985b53c5-80a5-4289-bf85-aa953d32a456
+https://github.com/user-attachments/assets/e4c10b14-c6f9-4298-ade9-1986a124ddab
 
 
 ---
