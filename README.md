@@ -47,17 +47,6 @@ https://github.com/user-attachments/assets/e4c10b14-c6f9-4298-ade9-1986a124ddab
 
 ---
 
-## 📚 Ideal For
-
-This project is great for:
-
-- Beginner Android developers exploring hybrid Flutter integration  
-- Firebase-backed authentication and real-time data sync  
-- Hands-on experience with e-commerce UI/UX  
-- Learning how to publish Android apps to Google Play  
-
----
-
 ## 🔮 Coming Soon
 
 - 🌐 Dark mode support  
