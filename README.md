@@ -14,13 +14,11 @@ A modern Android e-commerce app built with native Android and Flutter modules.
 
 ---
 
-## 📷 Screenshots
+## 📷 Demo
 
-> _Add your screenshots to a `/screenshots` folder and link them below_
 
-| Login Page | Product Detail | Cart Page |
-|------------|----------------|-----------|
-| ![](screenshots/login.png) | ![](screenshots/detail.png) | ![](screenshots/cart.png) |
+https://github.com/user-attachments/assets/985b53c5-80a5-4289-bf85-aa953d32a456
+
 
 ---
 
@@ -38,9 +36,7 @@ A modern Android e-commerce app built with native Android and Flutter modules.
 ## 🚀 Getting Started
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/fluttersearch-app.git
-    ```
+   
 2. **Open in Android Studio**
 
 3. **Sync Gradle** and ensure the Flutter module loads correctly
@@ -48,12 +44,6 @@ A modern Android e-commerce app built with native Android and Flutter modules.
 4. **Add your** `google-services.json` **into the** `app/` **directory**
 
 5. **Build and Run**
-
----
-
-## 📦 Download
-
-➡️ [Download on Google Play](#) <!-- Replace with actual URL -->
 
 ---
 
