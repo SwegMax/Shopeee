@@ -1,4 +1,4 @@
-# 🛍️ FlutterSearch Shopping App
+# 🛍️ E-Commerce app with Flutter Search module
 
 A modern Android e-commerce app built with native Android and Flutter modules.
 
@@ -11,7 +11,6 @@ A modern Android e-commerce app built with native Android and Flutter modules.
   - Adjustable **quantity selector**
 - 🔍 Integrated **FlutterSearch** module for fast and responsive product searching
 - ☁️ Firebase as backend (Authentication, Database)
-- 📱 Available on [Google Play](#) <!-- Replace # with actual link -->
 
 ---
 
@@ -74,13 +73,3 @@ This project is great for:
 - 🌐 Dark mode support  
 - 💳 Payment gateway integration  
 - 📝 User reviews and ratings  
-
----
-
-## 🧑‍💻 Contact
-
-Feel free to reach out:
-
-**Your Name**  
-📧 [your.email@example.com](mailto:your.email@example.com)  
-🔗 [GitHub](https://github.com/yourusername)
