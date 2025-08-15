@@ -55,9 +55,7 @@ class BillingProductsAdapter: Adapter<BillingProductsAdapter.BillingProductsView
 
     override fun onBindViewHolder(holder: BillingProductsViewHolder, position: Int) {
         val billingProduct = differ.currentList[position]
-
         holder.bind(billingProduct)
-
     }
 
     override fun getItemCount(): Int {
